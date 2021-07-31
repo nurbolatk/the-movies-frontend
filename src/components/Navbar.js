@@ -1,4 +1,6 @@
 import React from 'react'
+import { useAsync } from '../hooks/useAsync'
+import { api } from '../utils/api'
 import { Button, FormGroup, Input } from './lib'
 import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
@@ -7,6 +9,8 @@ export function Navbar() {
   const isLogin = authState === 'login'
   const isRegister = authState === 'register'
 
+  const { data, isLoading, error, run } = useAsync()
+
   function setRegister() {
     setAuthState('register')
   }
@@ -14,6 +18,19 @@ export function Navbar() {
   function setLogin() {
     setAuthState('login')
   }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const {
+      email: { value: email },
+      password: { value: password },
+    } = e.target
+
+    const endpoint = isLogin ? 'auth/local' : 'auth/local/register'
+    run(api(endpoint, { data: { identifier: email, password } }))
+  }
+
+  console.log(data, isLoading, error)
 
   return (
     <div>
@@ -25,36 +42,61 @@ export function Navbar() {
           <Button onClick={setRegister}>Register</Button>
         </ModalOpenButton>
         <ModalContents title={authState} aria-label={`${authState} form`}>
-          <form>
-            <FormGroup>
-              <label htmlFor="email">Email</label>
-              <Input id="email" type="text" placeholder="example@email.com" />
-            </FormGroup>
-            <FormGroup>
-              <label htmlFor="password">Password</label>
-              <Input id="password" type="password" />
-            </FormGroup>
+          <form onSubmit={handleSubmit}>
             {isLogin && (
-              <div>
-                <Button>Login</Button>
-                <Button onClick={setRegister}>New here?</Button>
-              </div>
+              <>
+                <LoginForm />
+                <Button type="submit">Login</Button>
+                <Button type="button" onClick={setRegister}>
+                  New here?
+                </Button>
+              </>
             )}
             {isRegister && (
               <>
-                <FormGroup>
-                  <label htmlFor="confirm-password">Confirm Password</label>
-                  <Input id="confirm-password" type="password" />
-                </FormGroup>
-                <div>
-                  <Button>Register</Button>
-                  <Button onClick={setLogin}>Already a member?</Button>
-                </div>
+                <RegisterForm />
+                <Button type="submit">Register</Button>
+                <Button type="button" onClick={setLogin}>
+                  Already a member?
+                </Button>
               </>
             )}
           </form>
         </ModalContents>
       </Modal>
     </div>
+  )
+}
+
+function LoginForm() {
+  return (
+    <>
+      <FormGroup>
+        <label htmlFor="identifier">Email or Username</label>
+        <Input id="identifier" type="text" placeholder="example@email.com" />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="password">Password</label>
+        <Input id="password" type="password" />
+      </FormGroup>
+    </>
+  )
+}
+function RegisterForm() {
+  return (
+    <>
+      <FormGroup>
+        <label htmlFor="username">Username</label>
+        <Input id="username" type="text" />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="email">Email</label>
+        <Input id="email" type="text" placeholder="example@email.com" />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="password">Password</label>
+        <Input id="password" type="password" />
+      </FormGroup>
+    </>
   )
 }
