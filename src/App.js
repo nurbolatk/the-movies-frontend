@@ -1,5 +1,7 @@
+import { AppRoutes } from './context/AppRoutes'
+
 function App() {
-  return <div></div>
+  return <AppRoutes />
 }
 
 export default App
