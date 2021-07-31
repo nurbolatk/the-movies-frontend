@@ -1,5 +1,8 @@
-import Dialog from '@reach/dialog'
+/** @jsxImportSource @emotion/react */
+
 import React from 'react'
+import { css } from '@emotion/react'
+import Dialog from '@reach/dialog'
 import { callAll } from '../utils/callAll'
 
 const ModalContext = React.createContext()
@@ -28,7 +31,7 @@ function ModalOpenButton({ children: child }) {
   return React.cloneElement(child, { onClick: callAll(child.props.onClick, openModal) })
 }
 
-function ModalContents({ children }) {
+function ModalContents({ title, children, ...props }) {
   const { isOpen, setIsOpen } = useModal()
 
   function closeModal() {
@@ -36,9 +39,15 @@ function ModalContents({ children }) {
   }
 
   return (
-    <Dialog isOpen={isOpen} onDismiss={closeModal}>
+    <Dialog isOpen={isOpen} onDismiss={closeModal} {...props}>
       <button onClick={closeModal}>close</button>
-      <h2>This is modal</h2>
+      <h3
+        css={css`
+          text-transform: capitalize;
+        `}
+      >
+        {title}
+      </h3>
       {children}
     </Dialog>
   )

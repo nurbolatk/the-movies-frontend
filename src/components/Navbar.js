@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, FormGroup, Input } from './lib'
 import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
 export function Navbar() {
@@ -18,24 +19,40 @@ export function Navbar() {
     <div>
       <Modal>
         <ModalOpenButton>
-          <button onClick={setLogin}>Login</button>
+          <Button onClick={setLogin}>Login</Button>
         </ModalOpenButton>
         <ModalOpenButton>
-          <button onClick={setRegister}>Register</button>
+          <Button onClick={setRegister}>Register</Button>
         </ModalOpenButton>
-        <ModalContents>
-          {isLogin && (
-            <div>
-              <button>Login</button>
-              <button onClick={setRegister}>New here?</button>
-            </div>
-          )}
-          {isRegister && (
-            <div>
-              <button>Register</button>
-              <button onClick={setLogin}>Already a member?</button>
-            </div>
-          )}
+        <ModalContents title={authState} aria-label={`${authState} form`}>
+          <form>
+            <FormGroup>
+              <label htmlFor="email">Email</label>
+              <Input id="email" type="text" placeholder="example@email.com" />
+            </FormGroup>
+            <FormGroup>
+              <label htmlFor="password">Password</label>
+              <Input id="password" type="password" />
+            </FormGroup>
+            {isLogin && (
+              <div>
+                <Button>Login</Button>
+                <Button onClick={setRegister}>New here?</Button>
+              </div>
+            )}
+            {isRegister && (
+              <>
+                <FormGroup>
+                  <label htmlFor="confirm-password">Confirm Password</label>
+                  <Input id="confirm-password" type="password" />
+                </FormGroup>
+                <div>
+                  <Button>Register</Button>
+                  <Button onClick={setLogin}>Already a member?</Button>
+                </div>
+              </>
+            )}
+          </form>
         </ModalContents>
       </Modal>
     </div>
