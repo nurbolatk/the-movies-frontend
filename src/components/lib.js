@@ -1,4 +1,6 @@
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
+import { GiSpinningBlades } from 'react-icons/gi'
 
 const Button = styled.button`
   border: none;
@@ -9,6 +11,9 @@ const Button = styled.button`
   color: white;
   font-size: 1.4rem;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.primaryDark};
@@ -43,4 +48,17 @@ const Card = styled.div`
   box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.1);
 `
 
-export { Button, FormGroup, Input, Card }
+const spin = keyframes`
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`
+const Spinner = styled(GiSpinningBlades)`
+  animation: ${spin} 1s linear infinite;
+`
+
+export { Button, FormGroup, Input, Card, Spinner }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAsync } from '../hooks/useAsync'
 import { api } from '../utils/api'
-import { Button, FormGroup, Input } from './lib'
+import { Button, FormGroup, Input, Spinner } from './lib'
 import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
 export function Navbar() {
@@ -21,13 +21,13 @@ export function Navbar() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    const {
-      email: { value: email },
-      password: { value: password },
-    } = e.target
-
-    const endpoint = isLogin ? 'auth/local' : 'auth/local/register'
-    run(api(endpoint, { data: { identifier: email, password } }))
+    if (isLogin) {
+      const {
+        identifier: { value: identifier },
+        password: { value: password },
+      } = e.target.elements
+      run(api('auth/local', { data: { identifier, password } }))
+    }
   }
 
   console.log(data, isLoading, error)
@@ -46,9 +46,9 @@ export function Navbar() {
             {isLogin && (
               <>
                 <LoginForm />
-                <Button type="submit">Login</Button>
+                <Button type="submit">Login {isLoading && <Spinner />}</Button>
                 <Button type="button" onClick={setRegister}>
-                  New here?
+                  New here? <Spinner />
                 </Button>
               </>
             )}
