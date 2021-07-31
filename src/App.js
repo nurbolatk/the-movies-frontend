@@ -1,7 +1,13 @@
+import { Navbar } from './components/Navbar'
 import { AppRoutes } from './context/AppRoutes'
 
 function App() {
-  return <AppRoutes />
+  return (
+    <>
+      <Navbar />
+      <AppRoutes />
+    </>
+  )
 }
 
 export default App
