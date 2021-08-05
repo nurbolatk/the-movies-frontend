@@ -1,10 +1,20 @@
-import { keyframes } from '@emotion/react'
+/** @jsxImportSource @emotion/react */
+
+import { css, keyframes, useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { GiSpinningBlades } from 'react-icons/gi'
 
+const primaryColor = (props) => css`
+  background-color: ${props.theme.colors.primary};
+`
+const primaryDarkColor = (props) =>
+  css`
+    background-color: ${props.theme.colors.primaryDark};
+  `
+
 const Button = styled.button`
   border: none;
-  background-color: ${(props) => props.theme.colors.primary};
+  ${primaryColor};
   border-radius: 0.25rem;
   padding: 0.8rem 1.6rem;
   cursor: pointer;
@@ -16,7 +26,7 @@ const Button = styled.button`
   column-gap: 0.5rem;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.primaryDark};
+    ${primaryDarkColor};
   }
 `
 
@@ -31,14 +41,16 @@ const FormGroup = styled.div`
 `
 
 const Input = styled.input`
-  display: block;
-  width: 100%;
-  border: 1px solid ${(props) => props.theme.colors.border};
-  background-color: white;
-  color: ${(props) => props.theme.colors.secondary};
-  line-height: 1.5;
-  border-radius: 0.25rem;
-  padding: 0.8rem 1.2rem;
+  ${(props) => css`
+    display: block;
+    width: 100%;
+    border: 1px solid ${props.theme.colors.border};
+    background-color: white;
+    color: ${props.theme.colors.secondary};
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    padding: 0.8rem 1.2rem;
+  `}
 `
 
 const Card = styled.div`
@@ -61,4 +73,29 @@ const Spinner = styled(GiSpinningBlades)`
   animation: ${spin} 1s linear infinite;
 `
 
-export { Button, FormGroup, Input, Card, Spinner }
+function FullPageLoading() {
+  const theme = useTheme()
+  return (
+    <div
+      css={css`
+        position: fixed;
+        width: 100%;
+        min-height: 100vh;
+        z-index: 100;
+        background-color: ${theme.colors.purple};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `}
+    >
+      <Spinner
+        css={css`
+          font-size: 16rem;
+          color: white;
+        `}
+      />
+    </div>
+  )
+}
+
+export { Button, FormGroup, Input, Card, Spinner, FullPageLoading }

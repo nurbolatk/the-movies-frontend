@@ -23,6 +23,8 @@ async function api(endpoint, { data, token, headers: customHeaders, ...customCon
 
   const result = await response.json()
 
+  console.log({ api: result, response })
+
   if (response.ok) {
     return result
   } else {

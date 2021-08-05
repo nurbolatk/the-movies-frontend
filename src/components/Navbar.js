@@ -1,15 +1,14 @@
 import React from 'react'
-import { useAsync } from '../hooks/useAsync'
-import { api } from '../utils/api'
+import { useAuth } from '../context/AuthContext'
 import { Button, FormGroup, Input, Spinner } from './lib'
 import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
 export function Navbar() {
+  const { user, login, isLoading, logout } = useAuth()
+
   const [authState, setAuthState] = React.useState('login')
   const isLogin = authState === 'login'
   const isRegister = authState === 'register'
-
-  const { data, isLoading, error, run } = useAsync()
 
   function setRegister() {
     setAuthState('register')
@@ -26,44 +25,51 @@ export function Navbar() {
         identifier: { value: identifier },
         password: { value: password },
       } = e.target.elements
-      run(api('auth/local', { data: { identifier, password } }))
+      login({ identifier, password })
+    } else {
     }
   }
 
-  console.log(data, isLoading, error)
+  function handleLogout() {
+    logout()
+  }
 
   return (
     <div>
-      <Modal>
-        <ModalOpenButton>
-          <Button onClick={setLogin}>Login</Button>
-        </ModalOpenButton>
-        <ModalOpenButton>
-          <Button onClick={setRegister}>Register</Button>
-        </ModalOpenButton>
-        <ModalContents title={authState} aria-label={`${authState} form`}>
-          <form onSubmit={handleSubmit}>
-            {isLogin && (
-              <>
-                <LoginForm />
-                <Button type="submit">Login {isLoading && <Spinner />}</Button>
-                <Button type="button" onClick={setRegister}>
-                  New here? <Spinner />
-                </Button>
-              </>
-            )}
-            {isRegister && (
-              <>
-                <RegisterForm />
-                <Button type="submit">Register</Button>
-                <Button type="button" onClick={setLogin}>
-                  Already a member?
-                </Button>
-              </>
-            )}
-          </form>
-        </ModalContents>
-      </Modal>
+      {!user ? (
+        <Modal>
+          <ModalOpenButton>
+            <Button onClick={setLogin}>Login</Button>
+          </ModalOpenButton>
+          <ModalOpenButton>
+            <Button onClick={setRegister}>Register</Button>
+          </ModalOpenButton>
+          <ModalContents title={authState} aria-label={`${authState} form`}>
+            <form onSubmit={handleSubmit}>
+              {isLogin && (
+                <>
+                  <LoginForm />
+                  <Button type="submit">Login {isLoading && <Spinner />}</Button>
+                  <Button type="button" onClick={setRegister}>
+                    New here? <Spinner />
+                  </Button>
+                </>
+              )}
+              {isRegister && (
+                <>
+                  <RegisterForm />
+                  <Button type="submit">Register</Button>
+                  <Button type="button" onClick={setLogin}>
+                    Already a member?
+                  </Button>
+                </>
+              )}
+            </form>
+          </ModalContents>
+        </Modal>
+      ) : (
+        <Button onClick={handleLogout}>Logout</Button>
+      )}
     </div>
   )
 }
