@@ -54,6 +54,7 @@ export function Navbar() {
         css={{
           fontFamily: theme.font.title,
           fontSize: '3rem',
+          marginRight: 'auto',
         }}
       >
         the movies
@@ -61,14 +62,7 @@ export function Navbar() {
       {!user ? (
         <Modal>
           <ModalOpenButton>
-            <Button
-              css={{
-                marginLeft: 'auto',
-              }}
-              onClick={setLogin}
-            >
-              Login
-            </Button>
+            <Button onClick={setLogin}>Login</Button>
           </ModalOpenButton>
           <ModalOpenButton>
             <ButtonText onClick={setRegister}>Register</ButtonText>
@@ -97,7 +91,10 @@ export function Navbar() {
           </ModalContents>
         </Modal>
       ) : (
-        <Button onClick={handleLogout}>Logout</Button>
+        <>
+          <p>Hi, {user.username}</p>
+          <Button onClick={handleLogout}>Logout</Button>
+        </>
       )}
     </div>
   )
