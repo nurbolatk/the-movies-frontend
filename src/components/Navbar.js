@@ -2,7 +2,7 @@
 
 import { useTheme } from '@emotion/react'
 import React from 'react'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthProvider'
 import { Button, ButtonText, FormGroup, Input, Spinner } from './lib'
 import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
