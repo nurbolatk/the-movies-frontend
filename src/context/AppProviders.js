@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@emotion/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { AuthProvider } from './AuthContext'
+import { AuthProvider } from './AuthProvider'
 import './styles'
 import { AppGlobalStyles, theme } from './styles'
 

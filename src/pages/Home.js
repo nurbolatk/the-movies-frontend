@@ -1,3 +1,5 @@
+import { Container } from '../components/lib'
+
 export function Home() {
-  return <div>Home page</div>
+  return <Container>Home page</Container>
 }

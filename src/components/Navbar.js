@@ -2,8 +2,9 @@
 
 import { useTheme } from '@emotion/react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthProvider'
-import { Button, ButtonText, FormGroup, Input, Spinner } from './lib'
+import { Button, ButtonText, Container, FormGroup, Input, Spinner } from './lib'
 import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
 export function Navbar() {
@@ -41,61 +42,67 @@ export function Navbar() {
   return (
     <div
       css={{
-        display: 'flex',
         minHeight: '7rem',
-        padding: '1rem 2rem',
-        alignItems: 'center',
         backgroundColor: 'white',
         boxShadow: '0 45px 35px 0 rgb(154 161 171 / 15%)',
-        columnGap: '2rem',
       }}
     >
-      <p
+      <Container
         css={{
-          fontFamily: theme.font.title,
-          fontSize: '3rem',
-          marginRight: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '1rem',
+          columnGap: '2rem',
         }}
       >
-        the movies
-      </p>
-      {!user ? (
-        <Modal>
-          <ModalOpenButton>
-            <Button onClick={setLogin}>Login</Button>
-          </ModalOpenButton>
-          <ModalOpenButton>
-            <ButtonText onClick={setRegister}>Register</ButtonText>
-          </ModalOpenButton>
-          <ModalContents title={authState} aria-label={`${authState} form`}>
-            <form onSubmit={handleSubmit}>
-              {isLogin && (
-                <>
-                  <LoginForm />
-                  <Button type="submit">Login {isLoading && <Spinner />}</Button>
-                  <Button type="button" onClick={setRegister}>
-                    New here? <Spinner />
-                  </Button>
-                </>
-              )}
-              {isRegister && (
-                <>
-                  <RegisterForm />
-                  <Button type="submit">Register</Button>
-                  <Button type="button" onClick={setLogin}>
-                    Already a member?
-                  </Button>
-                </>
-              )}
-            </form>
-          </ModalContents>
-        </Modal>
-      ) : (
-        <>
-          <p>Hi, {user.username}</p>
-          <Button onClick={handleLogout}>Logout</Button>
-        </>
-      )}
+        <Link
+          to="/"
+          css={{
+            fontFamily: theme.font.title,
+            fontSize: '3rem',
+            marginRight: 'auto',
+          }}
+        >
+          the movies
+        </Link>
+        {!user ? (
+          <Modal>
+            <ModalOpenButton>
+              <Button onClick={setLogin}>Login</Button>
+            </ModalOpenButton>
+            <ModalOpenButton>
+              <ButtonText onClick={setRegister}>Register</ButtonText>
+            </ModalOpenButton>
+            <ModalContents title={authState} aria-label={`${authState} form`}>
+              <form onSubmit={handleSubmit}>
+                {isLogin && (
+                  <>
+                    <LoginForm />
+                    <Button type="submit">Login {isLoading && <Spinner />}</Button>
+                    <Button type="button" onClick={setRegister}>
+                      New here? <Spinner />
+                    </Button>
+                  </>
+                )}
+                {isRegister && (
+                  <>
+                    <RegisterForm />
+                    <Button type="submit">Register</Button>
+                    <Button type="button" onClick={setLogin}>
+                      Already a member?
+                    </Button>
+                  </>
+                )}
+              </form>
+            </ModalContents>
+          </Modal>
+        ) : (
+          <>
+            <p>Hi, {user.username}</p>
+            <Button onClick={handleLogout}>Logout</Button>
+          </>
+        )}
+      </Container>
     </div>
   )
 }
