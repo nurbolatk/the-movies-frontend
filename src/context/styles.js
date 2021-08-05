@@ -107,19 +107,27 @@ export function AppGlobalStyles({ children }) {
 
           h4 {
             font-size: calc(1.9rem);
+            font-weight: 400;
           }
 
           h5 {
             font-size: calc(1.6rem);
+            /* font-weight: 400; */
           }
 
           h6 {
             font-size: calc(1.2rem);
+            /* font-weight: 400; */
           }
 
           a {
             color: inherit;
             text-decoration: none;
+          }
+
+          img {
+            display: block;
+            width: 100%;
           }
         `}
       />
