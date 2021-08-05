@@ -1,9 +1,13 @@
+/** @jsxImportSource @emotion/react */
+
+import { useTheme } from '@emotion/react'
 import React from 'react'
 import { useAuth } from '../context/AuthContext'
-import { Button, FormGroup, Input, Spinner } from './lib'
+import { Button, ButtonText, FormGroup, Input, Spinner } from './lib'
 import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
 export function Navbar() {
+  const theme = useTheme()
   const { user, login, isLoading, logout } = useAuth()
 
   const [authState, setAuthState] = React.useState('login')
@@ -35,14 +39,39 @@ export function Navbar() {
   }
 
   return (
-    <div>
+    <div
+      css={{
+        display: 'flex',
+        minHeight: '7rem',
+        padding: '1rem 2rem',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        boxShadow: '0 45px 35px 0 rgb(154 161 171 / 15%)',
+        columnGap: '2rem',
+      }}
+    >
+      <p
+        css={{
+          fontFamily: theme.font.title,
+          fontSize: '3rem',
+        }}
+      >
+        the movies
+      </p>
       {!user ? (
         <Modal>
           <ModalOpenButton>
-            <Button onClick={setLogin}>Login</Button>
+            <Button
+              css={{
+                marginLeft: 'auto',
+              }}
+              onClick={setLogin}
+            >
+              Login
+            </Button>
           </ModalOpenButton>
           <ModalOpenButton>
-            <Button onClick={setRegister}>Register</Button>
+            <ButtonText onClick={setRegister}>Register</ButtonText>
           </ModalOpenButton>
           <ModalContents title={authState} aria-label={`${authState} form`}>
             <form onSubmit={handleSubmit}>

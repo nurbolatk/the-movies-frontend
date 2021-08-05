@@ -16,11 +16,10 @@ const Button = styled.button`
   border: none;
   ${primaryColor};
   border-radius: 0.25rem;
-  padding: 0.8rem 1.6rem;
+  padding: 0.7rem 1.4rem;
   cursor: pointer;
   color: white;
   font-size: 1.4rem;
-  text-transform: uppercase;
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
@@ -28,6 +27,10 @@ const Button = styled.button`
   &:hover {
     ${primaryDarkColor};
   }
+`
+
+const ButtonText = styled.button`
+  background: none;
 `
 
 const FormGroup = styled.div`
@@ -98,4 +101,4 @@ function FullPageLoading() {
   )
 }
 
-export { Button, FormGroup, Input, Card, Spinner, FullPageLoading }
+export { Button, ButtonText, FormGroup, Input, Card, Spinner, FullPageLoading }

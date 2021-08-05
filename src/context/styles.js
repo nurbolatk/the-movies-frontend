@@ -29,6 +29,11 @@ export const theme = {
       border: colors.grayLight,
       secondary: colors.grayDarkest,
     },
+    font: {
+      title: '"Squada One", cursive',
+      body: `'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,
+    },
   },
 }
 
@@ -40,6 +45,7 @@ export function AppGlobalStyles({ children }) {
       <Global
         styles={css`
           @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
 
           :root {
             font-size: 62.5%;
@@ -56,14 +62,21 @@ export function AppGlobalStyles({ children }) {
 
           body {
             font-size: 1.6rem;
-            font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-              Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: ${theme.font.body};
             line-height: 1.6;
             color: ${theme.colors.secondary};
           }
 
+          button {
+            background: none;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
           button,
           input {
+            border: none;
             outline: none;
             font: inherit;
             color: inherit;
@@ -102,6 +115,11 @@ export function AppGlobalStyles({ children }) {
 
           h6 {
             font-size: calc(1.2rem);
+          }
+
+          a {
+            color: inherit;
+            text-decoration: none;
           }
         `}
       />
