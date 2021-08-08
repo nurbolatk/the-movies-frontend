@@ -4,8 +4,11 @@ import { Home } from '../pages/Home'
 export function AppRoutes() {
   return (
     <Switch>
-      <Route path="/">
+      <Route path="/" exact>
         <Home />
+      </Route>
+      <Route path="*">
+        <div>404 Not found</div>
       </Route>
     </Switch>
   )

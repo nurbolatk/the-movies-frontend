@@ -3,6 +3,8 @@
 import React from 'react'
 import { useAsync } from '../hooks/useAsync'
 import { api } from '../utils/api'
+import { Spinner } from './lib'
+import { MovieList } from './MovieList'
 
 export default function TopUpcoming() {
   const { data, isLoading, isError, error, run } = useAsync()
@@ -23,19 +25,8 @@ export default function TopUpcoming() {
           columnGap: '2rem',
         }}
       >
-        {data?.results?.map((movie) => {
-          return (
-            <div
-              css={{
-                flex: '0 0 220px',
-                width: '220px',
-                height: '330px',
-              }}
-            >
-              <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-            </div>
-          )
-        })}
+        {isLoading && <Spinner />}
+        {data && <MovieList movies={data} />}
       </div>
     </div>
   )
