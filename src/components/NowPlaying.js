@@ -6,12 +6,12 @@ import { api } from '../utils/api'
 import { Spinner } from './lib'
 import { MovieList } from './MovieList'
 
-export function TopUpcoming() {
+export function NowPlaying() {
   const { data, isLoading, isError, error, run } = useAsync()
   React.useEffect(() => {
     run(
       api(
-        'movie/upcoming',
+        'movie/now_playing',
         {
           queryParams: {
             page: 1,
@@ -25,7 +25,7 @@ export function TopUpcoming() {
   return (
     <div>
       <h4>
-        Top Upcoming ({data?.dates?.minimum} - {data?.dates?.maximum})
+        Now Playing ({data?.dates?.minimum} - {data?.dates?.maximum})
       </h4>
       <div
         css={{

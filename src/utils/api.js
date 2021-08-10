@@ -1,11 +1,12 @@
 const backendUrl = 'http://localhost:1337'
 const tmdbApiKey = process.env.REACT_APP_TMDB_API_KEY
-const tmdbUrl = (endpoint) =>
-  `https://api.themoviedb.org/3/${endpoint}?api_key=${tmdbApiKey}&language=en-US&page=1`
+
+const tmdbUrl = (endpoint, params) =>
+  `https://api.themoviedb.org/3/${endpoint}?api_key=${tmdbApiKey}&language=en-US&${params}`
 
 async function api(
   endpoint,
-  { data, token, headers: customHeaders, ...customConfig } = {},
+  { data, token, headers: customHeaders, queryParams, ...customConfig } = {},
   useTmdb = false,
 ) {
   const config = {
@@ -17,11 +18,17 @@ async function api(
     },
     ...customConfig,
   }
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`
   }
 
-  const url = useTmdb ? tmdbUrl(endpoint) : `${backendUrl}/${endpoint}`
+  let params = ''
+  if (queryParams) {
+    params = new URLSearchParams(queryParams).toString()
+  }
+
+  const url = useTmdb ? tmdbUrl(endpoint, params) : `${backendUrl}/${endpoint}?${params}`
 
   const response = await window.fetch(url, config)
 
@@ -31,8 +38,6 @@ async function api(
   }
 
   const result = await response.json()
-
-  console.log({ api: result, response })
 
   if (response.ok) {
     return result
