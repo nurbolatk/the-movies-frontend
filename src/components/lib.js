@@ -23,6 +23,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
+  white-space: nowrap;
 
   &:hover {
     ${primaryDarkColor};

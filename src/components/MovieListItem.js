@@ -10,7 +10,8 @@ const border = (props) => css`
 `
 const MovieContent = styled.div`
   position: absolute;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
   ${border}
   top: 0;
   left: 0;
@@ -23,9 +24,9 @@ const MovieContent = styled.div`
 `
 
 const MovieStyles = styled.div`
-  flex: 0 0 220px;
-  width: 220px;
-  height: 330px;
+  flex: 0 0 180px;
+  width: 180px;
+  height: 270px;
   position: relative;
   &:hover ${MovieContent} {
     opacity: 1;

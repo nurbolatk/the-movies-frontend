@@ -1,4 +1,7 @@
+/** @jsxImportSource @emotion/react */
+
 import React from 'react'
+import { Button, Spinner } from '../components/lib'
 import { useAsync } from '../hooks/useAsync'
 import { api } from '../utils/api'
 
@@ -12,12 +15,19 @@ export function BrowseByGenre() {
   return (
     <div>
       <h4>Browse by genre</h4>
-      <div>
+      <div
+        css={{
+          display: 'flex',
+          columnGap: '1rem',
+          alignItems: 'center',
+          overflow: 'auto',
+        }}
+      >
+        {isLoading && <Spinner />}
         {data?.genres?.map((genre) => (
-          <div>{genre.name}</div>
+          <Button>{genre.name}</Button>
         ))}
       </div>
-      <div>movies</div>
     </div>
   )
 }
