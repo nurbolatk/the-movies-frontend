@@ -3,6 +3,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled/macro'
 import { Link } from 'react-router-dom'
+import { Poster } from './lib'
 
 const MoviePoster = styled.div``
 const border = (props) => css`
@@ -41,7 +42,7 @@ export function MovieListItem({ movie }) {
   return (
     <MovieStyles>
       <MoviePoster>
-        <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+        <Poster movie={movie} />
       </MoviePoster>
       <MovieContent>
         <Link to={`/movie/${movie.id}`}>{movie.title}</Link>

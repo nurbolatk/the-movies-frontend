@@ -108,4 +108,8 @@ const Container = styled.div`
   padding: 0 1rem;
 `
 
-export { Button, ButtonText, FormGroup, Input, Card, Spinner, Container, FullPageLoading }
+function Poster({ movie }) {
+  return <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+}
+
+export { Button, ButtonText, FormGroup, Input, Card, Spinner, Container, FullPageLoading, Poster }
