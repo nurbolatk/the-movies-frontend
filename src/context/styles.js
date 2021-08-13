@@ -1,5 +1,6 @@
 import { css, Global, useTheme } from '@emotion/react'
 import '@reach/dialog/styles.css'
+import '@reach/tooltip/styles.css'
 
 export const colors = {
   blue: '#2c8ef8',
@@ -72,6 +73,7 @@ export function AppGlobalStyles({ children }) {
             &:hover {
               cursor: pointer;
             }
+            transition: all 0.2s;
           }
 
           button,

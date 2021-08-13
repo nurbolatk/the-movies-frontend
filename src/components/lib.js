@@ -108,8 +108,31 @@ const Container = styled.div`
   padding: 0 1rem;
 `
 
+const ButtonIcon = styled.button`
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+`
+
 function Poster({ movie }) {
   return <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
 }
 
-export { Button, ButtonText, FormGroup, Input, Card, Spinner, Container, FullPageLoading, Poster }
+export {
+  Button,
+  ButtonText,
+  ButtonIcon,
+  FormGroup,
+  Input,
+  Card,
+  Spinner,
+  Container,
+  FullPageLoading,
+  Poster,
+}

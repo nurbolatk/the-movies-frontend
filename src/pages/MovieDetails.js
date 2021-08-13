@@ -2,9 +2,11 @@
 import React from 'react'
 
 import { useParams } from 'react-router-dom'
-import { Button, Container, Poster, Spinner } from '../components/lib'
+import { BsEye, BsBookmarkPlus } from 'react-icons/bs'
+import { Button, ButtonIcon, Container, Poster, Spinner } from '../components/lib'
 import { useAsync } from '../hooks/useAsync'
 import { api } from '../utils/api'
+import { StatusButtons } from '../components/StatusButtons'
 
 export function MovieDetails() {
   const { id } = useParams()
@@ -54,7 +56,24 @@ export function MovieDetails() {
                   rowGap: '1rem',
                 }}
               >
-                <h2>{data.title}</h2>
+                <div
+                  css={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <h2
+                    css={{
+                      marginRight: 'auto',
+                    }}
+                  >
+                    {data.title}
+                  </h2>
+                  <ButtonIcon>
+                    <BsBookmarkPlus />
+                  </ButtonIcon>
+                  <StatusButtons />
+                </div>
                 <p>{data.release_date}</p>
                 <p>{data.overview}</p>
                 <div
