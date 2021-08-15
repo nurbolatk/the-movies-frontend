@@ -3,7 +3,7 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import Dialog from '@reach/dialog'
-import { callAll } from '../utils/callAll'
+import { callAll } from 'utils/callAll'
 
 const ModalContext = React.createContext()
 

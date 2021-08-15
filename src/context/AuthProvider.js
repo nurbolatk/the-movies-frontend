@@ -1,8 +1,8 @@
 import React from 'react'
-import { useAsync } from '../hooks/useAsync'
-import * as auth from './auth-manager'
-import { api } from '../utils/api'
-import { FullPageLoading } from '../components/lib'
+import { useAsync } from 'hooks/useAsync'
+import * as auth from 'context/auth-manager'
+import { api } from 'utils/api'
+import { FullPageLoading } from 'components/atoms'
 
 const AuthContext = React.createContext()
 

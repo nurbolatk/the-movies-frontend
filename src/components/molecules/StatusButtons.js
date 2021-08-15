@@ -4,9 +4,9 @@ import { useTheme } from '@emotion/react'
 import Tooltip from '@reach/tooltip'
 import { BsBookmarkFill, BsBookmarkPlus, BsEye, BsEyeFill } from 'react-icons/bs'
 import { BiErrorAlt } from 'react-icons/bi'
-import { useCreateListItem, useListItem, useRemoveListItem } from '../hooks/lists'
-import { useAsync } from '../hooks/useAsync'
-import { ButtonIcon, Spinner } from './lib'
+import { useCreateListItem, useListItem, useRemoveListItem } from 'hooks/lists'
+import { useAsync } from 'hooks/useAsync'
+import { ButtonIcon, Spinner } from 'components/atoms'
 
 function TooltipButton({ label, icon, highlight, onClick, ...rest }) {
   const { error, isLoading, isError, reset, run } = useAsync()

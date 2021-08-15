@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
-import { Home } from '../pages/Home'
-import { MovieDetails } from '../pages/MovieDetails'
+import { Home } from 'pages/Home'
+import { MovieDetails } from 'pages/MovieDetails'
 
 export function AppRoutes() {
   return (

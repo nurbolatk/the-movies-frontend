@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react'
-import { useAsync } from '../hooks/useAsync'
-import { api } from '../utils/api'
-import { Spinner } from './lib'
-import { MovieList } from './MovieList'
+import { useAsync } from 'hooks/useAsync'
+import { api } from 'utils/api'
+import { Spinner } from 'components/atoms'
+import { MovieList } from 'components/molecules/MovieList'
 
-export function Popular() {
+export function Upcoming() {
   const { data, isLoading, isError, error, run } = useAsync()
   React.useEffect(() => {
     run(
       api(
-        'movie/popular',
+        'movie/upcoming',
         {
           queryParams: {
             page: 1,
@@ -24,7 +24,9 @@ export function Popular() {
 
   return (
     <div>
-      <h4>Popular</h4>
+      <h4>
+        Upcoming ({data?.dates?.minimum} - {data?.dates?.maximum})
+      </h4>
       <div
         css={{
           display: 'flex',

@@ -3,7 +3,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled/macro'
 import { Link } from 'react-router-dom'
-import { Poster } from './lib'
+import { Poster } from 'components/atoms'
 
 const MoviePoster = styled.div``
 const border = (props) => css`

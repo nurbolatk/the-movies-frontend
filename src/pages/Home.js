@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
-import { BrowseByGenre } from '../components/BrowseByGenre'
-import { Container } from '../components/lib'
-import { NowPlaying } from '../components/NowPlaying'
-import { Popular } from '../components/PopularMovies'
-import { SearchForm } from '../components/SearchForm'
-import { Upcoming } from '../components/Upcoming'
+import { BrowseByGenre } from 'components/molecules/BrowseByGenre'
+import { Container } from 'components/atoms'
+import { NowPlaying } from 'components/organisms/NowPlaying'
+import { Popular } from 'components/organisms/PopularMovies'
+import { Upcoming } from 'components/organisms/Upcoming'
+import { SearchForm } from 'components/molecules/SearchForm'
 
 export function Home() {
   return (

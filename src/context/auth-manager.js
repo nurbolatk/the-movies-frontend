@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_AUTH_KEY = 'the-movies-app-'
+const LOCAL_STORAGE_AUTH_KEY = 'the-movies-app-token'
 
 function getToken() {
   return window.localStorage.getItem(LOCAL_STORAGE_AUTH_KEY)

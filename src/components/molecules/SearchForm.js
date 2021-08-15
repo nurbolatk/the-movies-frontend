@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { GoSearch } from 'react-icons/go'
-import { Input } from './lib'
+import { Input } from 'components/atoms'
 
 export function SearchForm() {
   function handleSearch(e) {

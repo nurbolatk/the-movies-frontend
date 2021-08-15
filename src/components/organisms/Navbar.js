@@ -3,9 +3,9 @@
 import { useTheme } from '@emotion/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthProvider'
-import { Button, ButtonText, Container, FormGroup, Input, Spinner } from './lib'
-import { Modal, ModalContents, ModalOpenButton } from './Modal'
+import { useAuth } from 'context/AuthProvider'
+import { Button, ButtonText, Container, FormGroup, Input, Spinner } from 'components/atoms'
+import { Modal, ModalContents, ModalOpenButton } from 'components/organisms/Modal'
 
 export function Navbar() {
   const theme = useTheme()

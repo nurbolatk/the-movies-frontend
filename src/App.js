@@ -1,5 +1,5 @@
-import { Navbar } from './components/Navbar'
-import { AppRoutes } from './context/AppRoutes'
+import { Navbar } from 'components/organisms/Navbar'
+import { AppRoutes } from 'context/AppRoutes'
 
 function App() {
   return (

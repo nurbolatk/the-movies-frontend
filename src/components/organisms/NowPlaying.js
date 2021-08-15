@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react'
-import { useAsync } from '../hooks/useAsync'
-import { api } from '../utils/api'
-import { Spinner } from './lib'
-import { MovieList } from './MovieList'
+import { useAsync } from 'hooks/useAsync'
+import { api } from 'utils/api'
+import { Spinner } from 'components/atoms'
+import { MovieList } from 'components/molecules/MovieList'
 
 export function NowPlaying() {
   const { data, isLoading, isError, error, run } = useAsync()

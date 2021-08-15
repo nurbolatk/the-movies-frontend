@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { useAuth } from '../context/AuthProvider'
-import { api } from '../utils/api'
+import { useAuth } from 'context/AuthProvider'
+import { api } from 'utils/api'
 
 function useList(endpoint) {
   const { user } = useAuth()

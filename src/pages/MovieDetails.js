@@ -2,11 +2,11 @@
 import React from 'react'
 
 import { useParams } from 'react-router-dom'
-import { Button, Container, Poster, Spinner } from '../components/lib'
-import { useAsync } from '../hooks/useAsync'
-import { api } from '../utils/api'
-import { StatusButtons } from '../components/StatusButtons'
-import { useAuth } from '../context/AuthProvider'
+import { Button, Container, Poster, Spinner } from 'components/atoms'
+import { useAsync } from 'hooks/useAsync'
+import { api } from 'utils/api'
+import { StatusButtons } from 'components/molecules/StatusButtons'
+import { useAuth } from 'context/AuthProvider'
 
 export function MovieDetails() {
   const { id } = useParams()

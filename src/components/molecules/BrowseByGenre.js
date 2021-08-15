@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react'
-import { Button, Spinner } from '../components/lib'
-import { useAsync } from '../hooks/useAsync'
-import { api } from '../utils/api'
+import { Button, Spinner } from 'components/atoms'
+import { useAsync } from 'hooks/useAsync'
+import { api } from 'utils/api'
 
 export function BrowseByGenre() {
   const { data, run, isLoading } = useAsync()

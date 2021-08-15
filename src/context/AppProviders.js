@@ -1,9 +1,9 @@
 import { ThemeProvider } from '@emotion/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { AuthProvider } from './AuthProvider'
-import './styles'
-import { AppGlobalStyles, theme } from './styles'
+import { AuthProvider } from 'context/AuthProvider'
+import 'context/styles'
+import { AppGlobalStyles, theme } from 'context/styles'
 
 const queryClient = new QueryClient()
 
