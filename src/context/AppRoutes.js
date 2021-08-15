@@ -20,6 +20,9 @@ export function AppRoutes() {
       <Route path="/discover/:query">
         <Discover />
       </Route>
+      <Route path="/genres/:genreId">
+        <Discover />
+      </Route>
       <Route path="*">
         <div>404 Not found</div>
       </Route>

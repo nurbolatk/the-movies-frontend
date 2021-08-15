@@ -7,6 +7,7 @@ import { StatusButtons } from 'components/molecules/StatusButtons'
 import { useAuth } from 'context/AuthProvider'
 import { GenresList } from 'components/molecules/GenresList'
 import { useMovie } from 'hooks/movies'
+import { mq } from 'context/styles'
 
 export function MovieDetails() {
   const { id } = useParams()
@@ -35,14 +36,20 @@ export function MovieDetails() {
               css={{
                 display: 'flex',
                 columnGap: '2rem',
+                [mq.small]: {
+                  flexDirection: 'column',
+                },
               }}
             >
               <div
                 css={{
-                  flex: '0 0 300px',
+                  flexShrink: 0,
                   width: '300px',
                   overflow: 'hidden',
                   borderRadius: '0.25rem',
+                  [mq.small]: {
+                    width: '100%',
+                  },
                 }}
               >
                 <Poster movie={movie} />
@@ -74,7 +81,8 @@ export function MovieDetails() {
                 <div
                   css={{
                     display: 'flex',
-                    columnGap: '1rem',
+                    gap: '1rem',
+                    flexWrap: 'wrap',
                   }}
                 >
                   <GenresList genres={movie.genres} />

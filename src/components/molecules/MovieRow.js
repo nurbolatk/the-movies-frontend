@@ -2,11 +2,13 @@
 import { Link } from 'react-router-dom'
 import { Poster } from 'components/atoms'
 import { mq } from 'context/styles'
+import { useAuth } from 'context/AuthProvider'
+import { StatusButtons } from './StatusButtons'
 
 export function MovieRow({ movie }) {
+  const { user } = useAuth()
   return (
-    <Link
-      to={`/movie/${movie.id}`}
+    <div
       css={{
         display: 'flex',
         columnGap: '2rem',
@@ -15,7 +17,8 @@ export function MovieRow({ movie }) {
         },
       }}
     >
-      <div
+      <Link
+        to={`/movie/${movie.id}`}
         css={{
           flexShrink: 0,
           width: 140,
@@ -27,7 +30,7 @@ export function MovieRow({ movie }) {
         }}
       >
         <Poster movie={movie} />
-      </div>
+      </Link>
       <div
         css={{
           display: 'flex',
@@ -40,19 +43,19 @@ export function MovieRow({ movie }) {
           css={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
           }}
         >
           <h3
             css={{
-              margin: 0,
+              margin: '0 auto 0 0',
             }}
           >
-            {movie.title}
+            <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
           </h3>
+          {user && <StatusButtons movie={movie} />}
         </div>
         <p>{movie.release_date}</p>
       </div>
-    </Link>
+    </div>
   )
 }

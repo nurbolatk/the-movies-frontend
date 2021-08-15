@@ -7,12 +7,12 @@ import { useParams } from 'react-router-dom'
 import { useMovieSearch } from 'hooks/movies'
 import { MovieRow } from 'components/molecules/MovieRow'
 import { useTheme } from '@emotion/react'
+import { SearchForm } from 'components/molecules/SearchForm'
 
 export function Discover() {
-  const { query: initialQuery } = useParams()
+  const { query } = useParams()
   const theme = useTheme()
-  const [query, setQuery] = React.useState(initialQuery ?? '')
-  const { movies, error, isLoading, isError, isSuccess } = useMovieSearch(query)
+  const { movies, error, isLoading, isError, isSuccess } = useMovieSearch(query ?? '')
 
   return (
     <Container
@@ -23,9 +23,14 @@ export function Discover() {
         padding: '1rem',
       }}
     >
+      <SearchForm />
       {isLoading && <Spinner />}
       {movies?.results?.length && (
-        <div>
+        <div
+          css={{
+            marginTop: '2rem',
+          }}
+        >
           {movies.results.map((movie) => (
             <MovieRow key={movie.id} movie={movie} />
           ))}
