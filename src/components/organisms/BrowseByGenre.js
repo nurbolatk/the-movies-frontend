@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react'
-import { Button, Spinner } from 'components/atoms'
+import { Spinner } from 'components/atoms'
 import { useAsync } from 'hooks/useAsync'
 import { api } from 'utils/api'
+import { GenresList } from 'components/molecules/GenresList'
 
 export function BrowseByGenre() {
   const { data, run, isLoading } = useAsync()
@@ -24,9 +25,7 @@ export function BrowseByGenre() {
         }}
       >
         {isLoading && <Spinner />}
-        {data?.genres?.map((genre) => (
-          <Button>{genre.name}</Button>
-        ))}
+        <GenresList genres={data?.genres} />
       </div>
     </div>
   )

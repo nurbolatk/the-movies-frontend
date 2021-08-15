@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useAsync } from 'hooks/useAsync'
-import { Spinner } from 'components/atoms'
+import { ErrorMessage, Spinner } from 'components/atoms'
 import { MovieList } from 'components/molecules/MovieList'
 
 export function HorizontalMovieList({ title, fetchFunction }) {
@@ -23,6 +23,7 @@ export function HorizontalMovieList({ title, fetchFunction }) {
         }}
       >
         {isLoading && <Spinner />}
+        {isError && <ErrorMessage error={error} />}
         {data && <MovieList movies={data} />}
       </div>
     </div>

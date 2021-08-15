@@ -2,11 +2,12 @@
 import React from 'react'
 
 import { useParams } from 'react-router-dom'
-import { Button, Container, Poster, Spinner } from 'components/atoms'
+import { Container, ErrorMessage, Poster, Spinner } from 'components/atoms'
 import { useAsync } from 'hooks/useAsync'
 import { api } from 'utils/api'
 import { StatusButtons } from 'components/molecules/StatusButtons'
 import { useAuth } from 'context/AuthProvider'
+import { GenresList } from 'components/molecules/GenresList'
 
 export function MovieDetails() {
   const { id } = useParams()
@@ -39,6 +40,7 @@ export function MovieDetails() {
         }}
       >
         {isLoading && <Spinner size={56} />}
+        {isError && <ErrorMessage error={error} />}
         {data && (
           <>
             <div
@@ -87,9 +89,7 @@ export function MovieDetails() {
                     columnGap: '1rem',
                   }}
                 >
-                  {data.genres.map((genre) => (
-                    <Button>{genre.name}</Button>
-                  ))}
+                  <GenresList genres={data.genres} />
                 </div>
               </div>
             </div>

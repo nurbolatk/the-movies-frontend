@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react'
 
-import { BrowseByGenre } from 'components/molecules/BrowseByGenre'
+import { BrowseByGenre } from 'components/organisms/BrowseByGenre'
 import { Container } from 'components/atoms'
 import { NowPlaying } from 'components/organisms/NowPlaying'
 import { Popular } from 'components/organisms/PopularMovies'

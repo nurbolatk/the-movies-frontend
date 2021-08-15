@@ -131,6 +131,7 @@ const errorMessageVariants = {
 
 function ErrorMessage({ error, variant = 'stacked', ...props }) {
   const theme = useTheme()
+
   return (
     <div role="alert" css={[{ color: theme.colors.red }, errorMessageVariants[variant]]} {...props}>
       <span>There was an error: </span>
@@ -140,7 +141,7 @@ function ErrorMessage({ error, variant = 'stacked', ...props }) {
           errorMessageVariants[variant],
         ]}
       >
-        {error.message}
+        {error.message ?? error.status_message}
       </pre>
     </div>
   )
