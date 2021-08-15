@@ -2,12 +2,10 @@
 import React from 'react'
 
 import { useParams } from 'react-router-dom'
-import { BsEye, BsBookmarkPlus } from 'react-icons/bs'
 import { Button, Container, Poster, Spinner } from '../components/lib'
 import { useAsync } from '../hooks/useAsync'
 import { api } from '../utils/api'
-import { StatusButtons, TooltipButton } from '../components/StatusButtons'
-import { useTheme } from '@emotion/react'
+import { StatusButtons } from '../components/StatusButtons'
 import { useAuth } from '../context/AuthProvider'
 
 export function MovieDetails() {
@@ -16,7 +14,6 @@ export function MovieDetails() {
 
   const { data, isLoading, run, error, isError } = useAsync()
   const { data: listItems, run: runListItems } = useAsync()
-  const theme = useTheme()
 
   React.useEffect(() => {
     run(api(`movie/${id}`, {}, true))

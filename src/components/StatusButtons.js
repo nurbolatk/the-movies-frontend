@@ -2,11 +2,10 @@
 
 import { useTheme } from '@emotion/react'
 import Tooltip from '@reach/tooltip'
-import { BsBookmarkCheck, BsBookmarkFill, BsBookmarkPlus, BsEye, BsEyeFill } from 'react-icons/bs'
-import { useMutation, useQuery, queryCache, useQueryClient } from 'react-query'
-import { useAuth } from '../context/AuthProvider'
+import { BsBookmarkFill, BsBookmarkPlus, BsEye, BsEyeFill } from 'react-icons/bs'
+import { BiErrorAlt } from 'react-icons/bi'
+import { useCreateListItem, useListItem, useRemoveListItem } from '../hooks/lists'
 import { useAsync } from '../hooks/useAsync'
-import { api } from '../utils/api'
 import { ButtonIcon, Spinner } from './lib'
 
 function TooltipButton({ label, icon, highlight, onClick, ...rest }) {
@@ -22,7 +21,7 @@ function TooltipButton({ label, icon, highlight, onClick, ...rest }) {
   }
 
   return (
-    <Tooltip label={label}>
+    <Tooltip label={isError ? error.message : label}>
       <ButtonIcon
         css={{
           ':hover, :focus': {
@@ -32,7 +31,7 @@ function TooltipButton({ label, icon, highlight, onClick, ...rest }) {
         onClick={handleClick}
         {...rest}
       >
-        {isLoading ? <Spinner /> : icon}
+        {isLoading ? <Spinner /> : isError ? <BiErrorAlt /> : icon}
       </ButtonIcon>
     </Tooltip>
   )
@@ -40,76 +39,27 @@ function TooltipButton({ label, icon, highlight, onClick, ...rest }) {
 
 function StatusButtons({ movie }) {
   const theme = useTheme()
-  const { user } = useAuth()
-  const queryClient = useQueryClient()
 
-  const { data: toWatchList } = useQuery({
-    queryKey: 'to-watch',
-    queryFn: () => api('to-watch', { token: user?.token }),
-  })
-  const toWatchItem = toWatchList?.find((item) => item.movieId === movie.id)
-
-  const { data: watchedList } = useQuery({
-    queryKey: 'watched',
-    queryFn: () => api('watched', { token: user?.token }),
-  })
-  const watchedItem = watchedList?.find((item) => item.movieId === movie.id)
-
-  const { mutateAsync: addToToWatch } = useMutation(
-    () =>
-      api('to-watch', {
-        data: {
-          movieId: movie.id,
-        },
-        token: user?.token,
-      }),
-    {
-      onSettled: () => queryClient.invalidateQueries('to-watch'),
-    },
-  )
-
-  const { mutateAsync: removeFromToWatch } = useMutation(
-    () =>
-      api(`to-watch/${toWatchItem.id}`, {
-        method: 'DELETE',
-        token: user?.token,
-      }),
-    {
-      onSettled: () => queryClient.invalidateQueries('to-watch'),
-    },
-  )
-
-  const { mutateAsync: addToWatched } = useMutation(
-    () =>
-      api('watched', {
-        data: {
-          movieId: movie.id,
-        },
-        token: user?.token,
-      }),
-    {
-      onSettled: () => queryClient.invalidateQueries('watched'),
-    },
-  )
-
-  const { mutateAsync: removeFromWatched } = useMutation(
-    () => api(`watched/${watchedItem.id}`, { method: 'DELETE', token: user?.token }),
-    { onSettled: () => queryClient.invalidateQueries('watched') },
-  )
+  const toWatchItem = useListItem('to-watch', movie.id)
+  const watchedItem = useListItem('watched', movie.id)
+  const { mutateAsync: removeFromToWatch } = useRemoveListItem('to-watch')
+  const { mutateAsync: addToToWatch } = useCreateListItem('to-watch')
+  const { mutateAsync: removeFromWatched } = useRemoveListItem('watched')
+  const { mutateAsync: addToWatched } = useCreateListItem('watched')
 
   return (
     <>
       {toWatchItem ? (
         <TooltipButton
           icon={<BsBookmarkFill />}
-          onClick={removeFromToWatch}
+          onClick={() => removeFromToWatch(toWatchItem)}
           highlight={theme.colors.red}
           label="Remove from watch later"
         />
       ) : (
         <TooltipButton
           icon={<BsBookmarkPlus />}
-          onClick={addToToWatch}
+          onClick={() => addToToWatch(movie)}
           highlight={theme.colors.blue}
           label="Watch later"
         />
@@ -117,14 +67,14 @@ function StatusButtons({ movie }) {
       {watchedItem ? (
         <TooltipButton
           icon={<BsEyeFill />}
-          onClick={removeFromWatched}
+          onClick={() => removeFromWatched(watchedItem)}
           highlight={theme.colors.purple}
           label="Remove from watched"
         />
       ) : (
         <TooltipButton
           icon={<BsEye />}
-          onClick={addToWatched}
+          onClick={() => addToWatched(movie)}
           highlight={theme.colors.purple}
           label="Add to watched"
         />
