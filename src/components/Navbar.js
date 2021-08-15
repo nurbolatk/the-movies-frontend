@@ -9,7 +9,7 @@ import { Modal, ModalContents, ModalOpenButton } from './Modal'
 
 export function Navbar() {
   const theme = useTheme()
-  const { user, login, isLoading, logout } = useAuth()
+  const { user, login, register, isLoading, logout } = useAuth()
 
   const [authState, setAuthState] = React.useState('login')
   const isLogin = authState === 'login'
@@ -32,6 +32,12 @@ export function Navbar() {
       } = e.target.elements
       login({ identifier, password })
     } else {
+      const {
+        username: { value: username },
+        email: { value: email },
+        password: { value: password },
+      } = e.target.elements
+      register({ username, email, password })
     }
   }
 

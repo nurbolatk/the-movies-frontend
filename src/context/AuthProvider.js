@@ -21,6 +21,10 @@ async function getUser() {
   const token = await auth.getToken()
   if (token) {
     user = await api('auth/getUserInfo', { token })
+    return {
+      ...user,
+      token,
+    }
   }
 
   return user

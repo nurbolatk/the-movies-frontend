@@ -3,19 +3,30 @@ import React from 'react'
 
 import { useParams } from 'react-router-dom'
 import { BsEye, BsBookmarkPlus } from 'react-icons/bs'
-import { Button, ButtonIcon, Container, Poster, Spinner } from '../components/lib'
+import { Button, Container, Poster, Spinner } from '../components/lib'
 import { useAsync } from '../hooks/useAsync'
 import { api } from '../utils/api'
-import { StatusButtons } from '../components/StatusButtons'
+import { StatusButtons, TooltipButton } from '../components/StatusButtons'
+import { useTheme } from '@emotion/react'
+import { useAuth } from '../context/AuthProvider'
 
 export function MovieDetails() {
   const { id } = useParams()
+  const { user } = useAuth()
 
   const { data, isLoading, run, error, isError } = useAsync()
+  const { data: listItems, run: runListItems } = useAsync()
+  const theme = useTheme()
 
   React.useEffect(() => {
     run(api(`movie/${id}`, {}, true))
   }, [run, id])
+
+  React.useEffect(() => {
+    runListItems(api(`list-items`, { token: user?.token }))
+  }, [runListItems, user])
+
+  console.log({ listItems })
 
   return (
     <Container
@@ -69,10 +80,7 @@ export function MovieDetails() {
                   >
                     {data.title}
                   </h2>
-                  <ButtonIcon>
-                    <BsBookmarkPlus />
-                  </ButtonIcon>
-                  <StatusButtons />
+                  <StatusButtons movie={data} />
                 </div>
                 <p>{data.release_date}</p>
                 <p>{data.overview}</p>

@@ -23,6 +23,8 @@ async function api(
     config.headers.Authorization = `Bearer ${token}`
   }
 
+  console.log({ token, endpoint })
+
   let params = ''
   if (queryParams) {
     params = new URLSearchParams(queryParams).toString()
