@@ -6,7 +6,7 @@ import { useAsync } from 'hooks/useAsync'
 import { api } from 'utils/api'
 import { GenresList } from 'components/molecules/GenresList'
 
-export function BrowseByGenre() {
+export function BrowseByGenre({ setGenre }) {
   const { data, run, isLoading } = useAsync()
 
   React.useEffect(() => {
@@ -25,7 +25,7 @@ export function BrowseByGenre() {
         }}
       >
         {isLoading && <Spinner />}
-        <GenresList genres={data?.genres} />
+        <GenresList handleGenreChange={setGenre} genres={data?.genres} />
       </div>
     </div>
   )

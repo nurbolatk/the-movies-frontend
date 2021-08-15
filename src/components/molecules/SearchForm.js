@@ -2,15 +2,12 @@
 
 import { GoSearch } from 'react-icons/go'
 import { Input } from 'components/atoms'
-import { useHistory } from 'react-router-dom'
 
-export function SearchForm() {
-  const history = useHistory()
-
+export function SearchForm({ onSubmit }) {
   function handleSearch(e) {
     e.preventDefault()
     const searchQuery = e.target.searchQuery.value
-    history.push(`movies?query=${searchQuery}`)
+    onSubmit(searchQuery)
   }
 
   return (

@@ -21,6 +21,12 @@ export const colors = {
   grayDarkest: '#343a40',
 }
 
+export const mq = {
+  large: '@media (min-width: 1200px)',
+  medium: '@media (min-width: 992px) and (max-width: 1199px)',
+  small: '@media (max-width: 991px)',
+}
+
 export const theme = {
   light: {
     colors: {
@@ -29,6 +35,7 @@ export const theme = {
       primaryDark: colors.indigoDark,
       border: colors.grayLight,
       secondary: colors.grayDarkest,
+      bgLight: colors.white,
     },
     font: {
       title: '"Squada One", cursive',

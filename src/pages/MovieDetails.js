@@ -3,21 +3,16 @@ import React from 'react'
 
 import { useParams } from 'react-router-dom'
 import { Container, ErrorMessage, Poster, Spinner } from 'components/atoms'
-import { useAsync } from 'hooks/useAsync'
-import { api } from 'utils/api'
 import { StatusButtons } from 'components/molecules/StatusButtons'
 import { useAuth } from 'context/AuthProvider'
 import { GenresList } from 'components/molecules/GenresList'
+import { useMovie } from 'hooks/movies'
 
 export function MovieDetails() {
   const { id } = useParams()
   const { user } = useAuth()
 
-  const { data, isLoading, run, error, isError } = useAsync()
-
-  React.useEffect(() => {
-    run(api(`movie/${id}`, {}, true))
-  }, [run, id])
+  const { movie, isLoading, isError, error } = useMovie(id)
 
   return (
     <Container
@@ -34,7 +29,7 @@ export function MovieDetails() {
       >
         {isLoading && <Spinner size={56} />}
         {isError && <ErrorMessage error={error} />}
-        {data && (
+        {movie && (
           <>
             <div
               css={{
@@ -50,7 +45,7 @@ export function MovieDetails() {
                   borderRadius: '0.25rem',
                 }}
               >
-                <Poster movie={data} />
+                <Poster movie={movie} />
               </div>
               <div
                 css={{
@@ -70,19 +65,19 @@ export function MovieDetails() {
                       marginRight: 'auto',
                     }}
                   >
-                    {data.title}
+                    {movie.title}
                   </h2>
-                  {user && <StatusButtons movie={data} />}
+                  {user && <StatusButtons movie={movie} />}
                 </div>
-                <p>{data.release_date}</p>
-                <p>{data.overview}</p>
+                <p>{movie.release_date}</p>
+                <p>{movie.overview}</p>
                 <div
                   css={{
                     display: 'flex',
                     columnGap: '1rem',
                   }}
                 >
-                  <GenresList genres={data.genres} />
+                  <GenresList genres={movie.genres} />
                 </div>
               </div>
             </div>
