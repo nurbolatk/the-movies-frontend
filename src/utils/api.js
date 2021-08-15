@@ -23,8 +23,6 @@ async function api(
     config.headers.Authorization = `Bearer ${token}`
   }
 
-  console.log({ token, endpoint })
-
   let params = ''
   if (queryParams) {
     params = new URLSearchParams(queryParams).toString()
@@ -40,12 +38,16 @@ async function api(
   }
 
   const result = await response.json()
+  let returnvalue
 
   if (response.ok) {
-    return result
+    returnvalue = Promise.resolve(result)
+    console.log({ ok: returnvalue })
   } else {
-    return Promise.reject(result)
+    returnvalue = Promise.reject(result)
+    console.log({ error: returnvalue })
   }
+  return returnvalue
 }
 
 export { api }
