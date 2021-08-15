@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import React from 'react'
 
 import { BrowseByGenre } from 'components/molecules/BrowseByGenre'
 import { Container } from 'components/atoms'

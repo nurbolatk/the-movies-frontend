@@ -1,15 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react'
-import { useAsync } from 'hooks/useAsync'
 import { api } from 'utils/api'
-import { Spinner } from 'components/atoms'
-import { MovieList } from 'components/molecules/MovieList'
+import { HorizontalMovieList } from 'components/molecules/HorizontalMovieList'
 
 export function Popular() {
-  const { data, isLoading, isError, error, run } = useAsync()
-  React.useEffect(() => {
-    run(
+  const fetchPopularMovies = React.useCallback(
+    () =>
       api(
         'movie/popular',
         {
@@ -19,22 +16,7 @@ export function Popular() {
         },
         true,
       ),
-    )
-  }, [run])
-
-  return (
-    <div>
-      <h4>Popular</h4>
-      <div
-        css={{
-          display: 'flex',
-          overflowX: 'auto',
-          columnGap: '2rem',
-        }}
-      >
-        {isLoading && <Spinner />}
-        {data && <MovieList movies={data} />}
-      </div>
-    </div>
+    [],
   )
+  return <HorizontalMovieList title="Popular" fetchFunction={fetchPopularMovies} />
 }

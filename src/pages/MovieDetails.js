@@ -77,7 +77,7 @@ export function MovieDetails() {
                   >
                     {data.title}
                   </h2>
-                  <StatusButtons movie={data} />
+                  {user && <StatusButtons movie={data} />}
                 </div>
                 <p>{data.release_date}</p>
                 <p>{data.overview}</p>

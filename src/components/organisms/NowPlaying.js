@@ -1,15 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react'
-import { useAsync } from 'hooks/useAsync'
 import { api } from 'utils/api'
-import { Spinner } from 'components/atoms'
-import { MovieList } from 'components/molecules/MovieList'
+import { HorizontalMovieList } from 'components/molecules/HorizontalMovieList'
 
 export function NowPlaying() {
-  const { data, isLoading, isError, error, run } = useAsync()
-  React.useEffect(() => {
-    run(
+  const fetchNowPlayingMovies = React.useCallback(
+    () =>
       api(
         'movie/now_playing',
         {
@@ -19,24 +16,7 @@ export function NowPlaying() {
         },
         true,
       ),
-    )
-  }, [run])
-
-  return (
-    <div>
-      <h4>
-        Now Playing ({data?.dates?.minimum} - {data?.dates?.maximum})
-      </h4>
-      <div
-        css={{
-          display: 'flex',
-          overflowX: 'auto',
-          columnGap: '2rem',
-        }}
-      >
-        {isLoading && <Spinner />}
-        {data && <MovieList movies={data} />}
-      </div>
-    </div>
+    [],
   )
+  return <HorizontalMovieList title="Now Playing" fetchFunction={fetchNowPlayingMovies} />
 }
