@@ -131,7 +131,6 @@ const errorMessageVariants = {
 
 function ErrorMessage({ error, variant = 'stacked', ...props }) {
   const theme = useTheme()
-  console.log({ error })
   let message = ''
 
   if (Array.isArray(error.message)) {

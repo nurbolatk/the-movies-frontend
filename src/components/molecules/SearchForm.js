@@ -2,17 +2,20 @@
 
 import { GoSearch } from 'react-icons/go'
 import { Input } from 'components/atoms'
+import { useHistory } from 'react-router-dom'
 
 export function SearchForm() {
+  const history = useHistory()
+
   function handleSearch(e) {
     e.preventDefault()
     const searchQuery = e.target.searchQuery.value
-    console.log(searchQuery)
+    history.push(`movies?query=${searchQuery}`)
   }
 
   return (
     <div>
-      <form onSubmit={handleSearch}>
+      <form onSubmit={handleSearch} autocomplete="off">
         <div
           css={{
             position: 'relative',

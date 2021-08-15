@@ -1,5 +1,16 @@
 import { Button } from 'components/atoms'
+import { useHistory } from 'react-router-dom'
 
 export function GenresList({ genres }) {
-  return genres?.map((genre) => <Button key={genre.id}>{genre.name}</Button>) ?? null
+  const history = useHistory()
+  function navigateToSearch(genreId) {
+    history.push(`movies?with_genres=${genreId}`)
+  }
+  return (
+    genres?.map((genre) => (
+      <Button onClick={() => navigateToSearch(genre.id)} key={genre.id}>
+        {genre.name}
+      </Button>
+    )) ?? null
+  )
 }
