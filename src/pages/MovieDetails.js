@@ -14,17 +14,10 @@ export function MovieDetails() {
   const { user } = useAuth()
 
   const { data, isLoading, run, error, isError } = useAsync()
-  const { data: listItems, run: runListItems } = useAsync()
 
   React.useEffect(() => {
     run(api(`movie/${id}`, {}, true))
   }, [run, id])
-
-  React.useEffect(() => {
-    runListItems(api(`list-items`, { token: user?.token }))
-  }, [runListItems, user])
-
-  console.log({ listItems })
 
   return (
     <Container

@@ -6,7 +6,7 @@ function getToken() {
 
 function handleAuthResponse(data) {
   window.localStorage.setItem(LOCAL_STORAGE_AUTH_KEY, data.jwt)
-  return data.user
+  return { ...data.user, token: data.jwt }
 }
 
 function login(credentials) {
