@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAsync } from 'hooks/useAsync'
-import * as auth from 'context/auth-manager'
+import * as auth from 'utils/auth-manager'
 import { api } from 'utils/api'
 import { FullPageLoading } from 'components/atoms'
 

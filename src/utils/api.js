@@ -38,16 +38,12 @@ async function api(
   }
 
   const result = await response.json()
-  let returnvalue
 
   if (response.ok) {
-    returnvalue = Promise.resolve(result)
-    console.log({ ok: returnvalue })
+    return result
   } else {
-    returnvalue = Promise.reject(result)
-    console.log({ error: returnvalue })
+    return Promise.reject(result)
   }
-  return returnvalue
 }
 
 export { api }

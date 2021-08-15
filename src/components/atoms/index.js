@@ -131,6 +131,25 @@ const errorMessageVariants = {
 
 function ErrorMessage({ error, variant = 'stacked', ...props }) {
   const theme = useTheme()
+  console.log({ error })
+  let message = ''
+
+  if (Array.isArray(error.message)) {
+    message = error.message.reduce((acc, message) => {
+      if (message.messages) {
+        const reduced = message.messages.reduce((acc, anotherMessage) => {
+          acc = `${acc.length ? ', ' : ''}${anotherMessage.message}`
+          return acc
+        }, '')
+        acc = `${acc.length ? ', ' : ''}${reduced}`
+      } else if (typeof message === 'string') {
+        acc = `${acc.length ? ', ' : ''}${message}`
+      }
+      return acc
+    }, '')
+  } else {
+    message = error.message ?? error.status_message ?? ''
+  }
 
   return (
     <div role="alert" css={[{ color: theme.colors.red }, errorMessageVariants[variant]]} {...props}>
@@ -141,7 +160,7 @@ function ErrorMessage({ error, variant = 'stacked', ...props }) {
           errorMessageVariants[variant],
         ]}
       >
-        {error.message ?? error.status_message}
+        {message}
       </pre>
     </div>
   )

@@ -11,16 +11,16 @@ const queryClient = new QueryClient()
 
 export function AppProviders({ children }) {
   return (
-    <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme.light}>
+    <ThemeProvider theme={theme.light}>
+      <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
+        <QueryClientProvider client={queryClient}>
           <Router>
             <AppGlobalStyles>
               <AuthProvider>{children}</AuthProvider>
             </AppGlobalStyles>
           </Router>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </ErrorBoundary>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </ThemeProvider>
   )
 }

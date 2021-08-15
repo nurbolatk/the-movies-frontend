@@ -4,6 +4,8 @@ import React from 'react'
 import { css } from '@emotion/react'
 import Dialog from '@reach/dialog'
 import { callAll } from 'utils/callAll'
+import { ButtonIcon } from 'components/atoms'
+import { BsX } from 'react-icons/bs'
 
 const ModalContext = React.createContext()
 
@@ -40,13 +42,18 @@ function ModalContents({ title, children, ...props }) {
 
   return (
     <Dialog isOpen={isOpen} onDismiss={closeModal} {...props}>
-      <button onClick={closeModal}>close</button>
       <h3
         css={css`
           text-transform: capitalize;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         `}
       >
         {title}
+        <ButtonIcon onClick={closeModal}>
+          <BsX />
+        </ButtonIcon>
       </h3>
       {children}
     </Dialog>
