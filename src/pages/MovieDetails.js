@@ -16,11 +16,7 @@ export function MovieDetails() {
   const { movie, isLoading, isError, error } = useMovie(id)
 
   return (
-    <Container
-      css={{
-        marginTop: '3rem',
-      }}
-    >
+    <Container>
       <div
         css={{
           backgroundColor: 'white',

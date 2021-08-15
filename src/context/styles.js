@@ -58,6 +58,7 @@ export function AppGlobalStyles({ children }) {
           :root {
             font-size: 62.5%;
             box-sizing: border-box;
+            height: 100%;
           }
 
           *,
@@ -73,6 +74,11 @@ export function AppGlobalStyles({ children }) {
             font-family: ${theme.font.body};
             line-height: 1.6;
             color: ${theme.colors.secondary};
+            height: 100%;
+          }
+
+          #root {
+            height: 100vh;
           }
 
           button {

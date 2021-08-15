@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Container, Spinner } from 'components/atoms'
+import { Container, ErrorMessage, Spinner } from 'components/atoms'
 import { useParams } from 'react-router-dom'
 import { useMovieSearch } from 'hooks/movies'
 import { MovieRow } from 'components/molecules/MovieRow'
@@ -24,7 +24,9 @@ export function Discover() {
       }}
     >
       <SearchForm />
+      {isError && <ErrorMessage error={error} />}
       {isLoading && <Spinner />}
+      {isSuccess && movies?.results.length === 0 && <p>No movies found with query "{query}"</p>}
       {movies?.results?.length && (
         <div
           css={{

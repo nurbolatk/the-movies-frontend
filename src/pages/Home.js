@@ -12,7 +12,6 @@ export function Home() {
   return (
     <Container
       css={{
-        margin: '3rem auto',
         display: 'flex',
         flexDirection: 'column',
         rowGap: '3rem',
