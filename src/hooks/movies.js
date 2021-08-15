@@ -34,3 +34,14 @@ export function useMovie(movieId) {
   )
   return { ...result, movie: result.data }
 }
+
+export function useGenre(genreId) {
+  const result = useQuery(['genreMovies', { genreId }], () =>
+    api('discover/movie', { queryParams: { with_genre: genreId, page: 1 } }, true),
+  )
+  return { ...result, movies: result.data }
+}
+
+export function useGenres() {
+  return useQuery('genres', () => api('genre/movie/list', {}, true))
+}

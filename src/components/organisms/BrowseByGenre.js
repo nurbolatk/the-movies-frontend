@@ -2,16 +2,11 @@
 
 import React from 'react'
 import { Spinner } from 'components/atoms'
-import { useAsync } from 'hooks/useAsync'
-import { api } from 'utils/api'
 import { GenresList } from 'components/molecules/GenresList'
+import { useGenres } from 'hooks/movies'
 
 export function BrowseByGenre() {
-  const { data, run, isLoading } = useAsync()
-
-  React.useEffect(() => {
-    run(api('genre/movie/list', {}, true))
-  }, [run])
+  const { data, isLoading } = useGenres()
 
   return (
     <div>
