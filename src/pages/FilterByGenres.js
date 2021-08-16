@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { useTheme } from '@emotion/react'
 import { Container, Spinner } from 'components/atoms'
 import { MovieRow } from 'components/molecules/MovieRow'
@@ -14,7 +15,6 @@ export function FilterByGenres() {
     <Container
       css={{
         background: theme.colors.bgLight,
-        marginTop: '3rem',
         marginBottom: '3rem',
         padding: '1rem',
       }}
