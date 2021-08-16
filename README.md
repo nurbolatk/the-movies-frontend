@@ -1,3 +1,9 @@
+# The pet project built with React, react-query and Emotion
+
+[Screenshot](https://sun9-34.userapi.com/impg/JQZpd060vYcIJTA5jAvhGxYM3pl48urjbdJ-Lw/9XiqQe3fkFU.jpg?size=800x1724&quality=96&sign=41445eca5609ea55d79bc83f569ba6d2&type=album)
+
+### See [demo](https://moviesbyn.netlify.app demo)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
