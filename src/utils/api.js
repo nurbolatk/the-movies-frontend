@@ -30,8 +30,6 @@ async function api(
 
   const url = useTmdb ? tmdbUrl(endpoint, params) : `${backendUrl}/${endpoint}?${params}`
 
-  console.log({env: process.env.REACT_APP_BACKEND_URL, url})
-
   const response = await window.fetch(url, config)
 
   if (response.status === 401) {

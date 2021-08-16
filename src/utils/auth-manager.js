@@ -21,7 +21,7 @@ function logout() {
   return window.localStorage.removeItem(LOCAL_STORAGE_AUTH_KEY)
 }
 
-const authURL = 'http://localhost:1337'
+const authURL = process.env.REACT_APP_BACKEND_URL
 
 function client(endpoint, data) {
   const config = {
