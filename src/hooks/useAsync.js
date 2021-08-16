@@ -60,12 +60,10 @@ function useAsync(initialState) {
       dispatch({ status: 'pending' })
       return promise.then(
         (data) => {
-          console.log('data from api', data)
           setData(data)
           return data
         },
         (error) => {
-          console.dir('error from api', error)
           setError(error)
           return error
         },

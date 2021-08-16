@@ -15,7 +15,6 @@ export function useMovieSearch(query) {
     {
       onSuccess: (data) => {
         for (const movie of data.results) {
-          console.log(queryClient.getQueryData())
           queryClient.setQueryData(['movie', { movieId: movie.id }], movie, {
             queryConfig,
           })
