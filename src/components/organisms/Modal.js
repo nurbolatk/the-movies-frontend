@@ -6,6 +6,7 @@ import Dialog from '@reach/dialog'
 import { callAll } from 'utils/callAll'
 import { ButtonIcon } from 'components/atoms'
 import { BsX } from 'react-icons/bs'
+import { mq } from 'context/styles'
 
 const ModalContext = React.createContext()
 
@@ -41,7 +42,16 @@ function ModalContents({ title, children, ...props }) {
   }
 
   return (
-    <Dialog isOpen={isOpen} onDismiss={closeModal} {...props}>
+    <Dialog
+      isOpen={isOpen}
+      onDismiss={closeModal}
+      {...props}
+      css={{
+        [mq.extraSmall]: {
+          width: '90%',
+        },
+      }}
+    >
       <h3
         css={css`
           text-transform: capitalize;

@@ -6,6 +6,7 @@ import { ButtonIcon, Container } from 'components/atoms'
 import { AuthModal } from './AuthModal'
 import { BsX } from 'react-icons/bs'
 import { Nav } from 'components/molecules/Nav'
+import { mq } from 'context/styles'
 
 export function Navbar() {
   const theme = useTheme()
@@ -44,6 +45,10 @@ export function Navbar() {
               top: '2%',
               transform: '0.3s',
               right: '5%',
+              display: 'none',
+              [mq.extraSmall]: {
+                display: 'block',
+              },
             }}
           >
             <BsX />

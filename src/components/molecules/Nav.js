@@ -21,7 +21,15 @@ export function Nav({ children }) {
   }
   return (
     <>
-      <ButtonIcon onClick={toggleMenu}>
+      <ButtonIcon
+        css={{
+          display: 'none',
+          [mq.extraSmall]: {
+            display: 'block',
+          },
+        }}
+        onClick={toggleMenu}
+      >
         <BiMenu />
       </ButtonIcon>
 
