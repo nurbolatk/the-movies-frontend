@@ -9,7 +9,7 @@ import { callAll } from 'utils/callAll'
 import { useTheme } from '@emotion/react'
 
 export function Nav({ children }) {
-  const [menuOpen, setMenuOpen] = React.useState(true)
+  const [menuOpen, setMenuOpen] = React.useState(false)
   const theme = useTheme()
 
   function toggleMenu(e) {
@@ -46,7 +46,7 @@ export function Nav({ children }) {
             flexDirection: 'column',
             backgroundColor: menuOpen ? 'rgba(0,0,0,0.3)' : 'transparent',
             position: 'fixed',
-            minHeight: '100vh',
+            height: '100%',
             width: '100%',
             zIndex: 100,
             transition: '0.3s',
