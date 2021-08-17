@@ -2,6 +2,7 @@
 
 import { css, keyframes, useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
+import { mq } from 'context/styles'
 import { GiSpinningBlades } from 'react-icons/gi'
 
 const primaryColor = (props) => css`
@@ -117,6 +118,11 @@ const ButtonIcon = styled.button`
   svg {
     width: 2rem;
     height: 2rem;
+
+    ${mq.extraSmall} {
+      width: 2.6rem;
+      height: 2.6rem;
+    }
   }
 `
 

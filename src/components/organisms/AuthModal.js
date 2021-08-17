@@ -5,13 +5,15 @@ import { useAuth } from 'context/AuthProvider'
 import { Button, ButtonText, ErrorMessage, FormGroup, Input, Spinner } from 'components/atoms'
 import { Modal, ModalContents, ModalOpenButton } from 'components/organisms/Modal'
 import { useAsync } from 'hooks/useAsync'
+import { mq } from 'context/styles'
 
-export function AuthModal() {
+export function AuthModal({ onClick: onNavItemClick }) {
   const { user, login, register, logout } = useAuth()
   const { run, isLoading, isError, error } = useAsync()
 
   function handleLogout() {
     logout()
+    onNavItemClick()
   }
 
   const [authState, setAuthState] = React.useState('login')
@@ -20,10 +22,12 @@ export function AuthModal() {
 
   function setRegister() {
     setAuthState('register')
+    onNavItemClick()
   }
 
   function setLogin() {
     setAuthState('login')
+    onNavItemClick()
   }
 
   function handleSubmit(e) {
@@ -46,7 +50,17 @@ export function AuthModal() {
   return !user ? (
     <Modal>
       <ModalOpenButton>
-        <Button onClick={setLogin}>Login</Button>
+        <Button
+          css={{
+            [mq.extraSmall]: {
+              marginTop: 'auto',
+              alignSelf: 'center',
+            },
+          }}
+          onClick={setLogin}
+        >
+          Login
+        </Button>
       </ModalOpenButton>
       <ModalOpenButton>
         <ButtonText onClick={setRegister}>Register</ButtonText>
@@ -93,7 +107,13 @@ export function AuthModal() {
     </Modal>
   ) : (
     <>
-      <p>Hi, {user.username}</p>
+      <p
+        css={{
+          marginTop: 'auto',
+        }}
+      >
+        Hi, {user.username}
+      </p>
       <Button onClick={handleLogout}>Logout</Button>
     </>
   )

@@ -15,7 +15,7 @@ export function SearchForm() {
 
   return (
     <div>
-      <form onSubmit={handleSearch} autocomplete="off">
+      <form onSubmit={handleSearch} autoComplete="off">
         <div
           css={{
             position: 'relative',

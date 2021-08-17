@@ -24,7 +24,7 @@ export function MovieRow({ movie }) {
           width: 140,
           overflow: 'hidden',
           borderRadius: '0.25rem',
-          [mq.small]: {
+          [mq.extraSmall]: {
             width: 100,
           },
         }}

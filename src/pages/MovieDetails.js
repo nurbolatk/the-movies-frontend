@@ -32,7 +32,7 @@ export function MovieDetails() {
               css={{
                 display: 'flex',
                 columnGap: '2rem',
-                [mq.small]: {
+                [mq.extraSmall]: {
                   flexDirection: 'column',
                 },
               }}
@@ -43,7 +43,7 @@ export function MovieDetails() {
                   width: '300px',
                   overflow: 'hidden',
                   borderRadius: '0.25rem',
-                  [mq.small]: {
+                  [mq.extraSmall]: {
                     width: '100%',
                   },
                 }}

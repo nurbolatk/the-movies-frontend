@@ -24,7 +24,8 @@ export const colors = {
 export const mq = {
   large: '@media (min-width: 1200px)',
   medium: '@media (min-width: 992px) and (max-width: 1199px)',
-  small: '@media (max-width: 991px)',
+  small: '@media (min-width: 696px) and (max-width: 991px)',
+  extraSmall: '@media (max-width: 695px)',
 }
 
 export const theme = {

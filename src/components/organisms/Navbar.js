@@ -2,8 +2,10 @@
 
 import { useTheme } from '@emotion/react'
 import { Link } from 'react-router-dom'
-import { Container } from 'components/atoms'
+import { ButtonIcon, Container } from 'components/atoms'
 import { AuthModal } from './AuthModal'
+import { BsX } from 'react-icons/bs'
+import { Nav } from 'components/molecules/Nav'
 
 export function Navbar() {
   const theme = useTheme()
@@ -21,7 +23,7 @@ export function Navbar() {
           display: 'flex',
           alignItems: 'center',
           padding: '1rem',
-          columnGap: '2rem',
+          position: 'relative',
         }}
       >
         <Link
@@ -30,11 +32,26 @@ export function Navbar() {
             fontFamily: theme.font.title,
             fontSize: '3rem',
             marginRight: 'auto',
+            whiteSpace: 'nowrap',
           }}
         >
           the movies
         </Link>
-        <AuthModal />
+        <Nav>
+          <ButtonIcon
+            css={{
+              position: 'absolute',
+              top: '2%',
+              transform: '0.3s',
+              right: '5%',
+            }}
+          >
+            <BsX />
+          </ButtonIcon>
+          <Link to="/to-watch">To Watch</Link>
+          <Link to="/watched">Watched</Link>
+          <AuthModal />
+        </Nav>
       </Container>
     </div>
   )
