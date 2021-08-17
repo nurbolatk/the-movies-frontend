@@ -25,7 +25,7 @@ export function Nav({ children }) {
         css={{
           display: 'none',
           [mq.extraSmall]: {
-            display: 'block',
+            display: 'flex',
           },
         }}
         onClick={toggleMenu}
