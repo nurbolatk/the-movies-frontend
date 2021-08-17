@@ -34,6 +34,7 @@ export function Nav({ children }) {
       </ButtonIcon>
 
       <nav
+        onClick={closeMenu}
         css={{
           display: 'flex',
           columnGap: '2rem',
