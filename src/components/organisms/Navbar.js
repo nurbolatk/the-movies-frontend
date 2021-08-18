@@ -53,8 +53,6 @@ export function Navbar() {
           >
             <BsX />
           </ButtonIcon>
-          <Link to="/to-watch">To Watch</Link>
-          <Link to="/watched">Watched</Link>
           <AuthModal />
         </Nav>
       </Container>

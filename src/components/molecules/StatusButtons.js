@@ -4,7 +4,7 @@ import { useTheme } from '@emotion/react'
 import Tooltip from '@reach/tooltip'
 import { BsBookmarkFill, BsBookmarkPlus, BsEye, BsEyeFill } from 'react-icons/bs'
 import { BiErrorAlt } from 'react-icons/bi'
-import { useCreateListItem, useListItem, useRemoveListItem } from 'hooks/lists'
+import { useCreateListItem, useListItem, useRemoveListItem, useUpdateListItem } from 'hooks/lists'
 import { useAsync } from 'hooks/useAsync'
 import { ButtonIcon, Spinner } from 'components/atoms'
 
@@ -40,44 +40,61 @@ function TooltipButton({ label, icon, highlight, onClick, ...rest }) {
 function StatusButtons({ movie }) {
   const theme = useTheme()
 
-  const toWatchItem = useListItem('to-watch', movie.id)
-  const watchedItem = useListItem('watched', movie.id)
-  const { mutateAsync: removeFromToWatch } = useRemoveListItem('to-watch')
-  const { mutateAsync: addToToWatch } = useCreateListItem('to-watch')
-  const { mutateAsync: removeFromWatched } = useRemoveListItem('watched')
-  const { mutateAsync: addToWatched } = useCreateListItem('watched')
+  const { listItem } = useListItem(movie.id)
+  const { mutateAsync: addListItem } = useCreateListItem()
+  const { mutateAsync: removeListItem } = useRemoveListItem()
+  const { mutateAsync: updateListItem } = useUpdateListItem()
 
   return (
     <>
-      {toWatchItem ? (
-        <TooltipButton
-          icon={<BsBookmarkFill />}
-          onClick={() => removeFromToWatch(toWatchItem)}
-          highlight={theme.colors.red}
-          label="Remove from watch later"
-        />
+      {listItem ? (
+        listItem.watched ? (
+          <TooltipButton
+            icon={<BsEyeFill />}
+            onClick={() => removeListItem(listItem)}
+            highlight={theme.colors.purple}
+            label="Remove from watched"
+          />
+        ) : (
+          <>
+            <TooltipButton
+              icon={<BsBookmarkFill />}
+              onClick={() => removeListItem(listItem)}
+              highlight={theme.colors.red}
+              label="Remove from watch later"
+            />
+            <TooltipButton
+              icon={<BsEye />}
+              onClick={() => updateListItem({ id: listItem.id, watched: true })}
+              highlight={theme.colors.purple}
+              label="Add to watched"
+            />
+          </>
+        )
       ) : (
-        <TooltipButton
-          icon={<BsBookmarkPlus />}
-          onClick={() => addToToWatch(movie)}
-          highlight={theme.colors.blue}
-          label="Watch later"
-        />
-      )}
-      {watchedItem ? (
-        <TooltipButton
-          icon={<BsEyeFill />}
-          onClick={() => removeFromWatched(watchedItem)}
-          highlight={theme.colors.purple}
-          label="Remove from watched"
-        />
-      ) : (
-        <TooltipButton
-          icon={<BsEye />}
-          onClick={() => addToWatched(movie)}
-          highlight={theme.colors.purple}
-          label="Add to watched"
-        />
+        <>
+          <TooltipButton
+            icon={<BsBookmarkPlus />}
+            onClick={() =>
+              addListItem({
+                movieId: movie.id,
+              })
+            }
+            highlight={theme.colors.blue}
+            label="Watch later"
+          />
+          <TooltipButton
+            icon={<BsEye />}
+            onClick={() =>
+              addListItem({
+                movieId: movie.id,
+                watched: true,
+              })
+            }
+            highlight={theme.colors.purple}
+            label="Add to watched"
+          />
+        </>
       )}
     </>
   )

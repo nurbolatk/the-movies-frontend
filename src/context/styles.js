@@ -37,6 +37,7 @@ export const theme = {
       border: colors.grayLight,
       secondary: colors.grayDarkest,
       bgLight: colors.white,
+      textColorDark: colors.grayDarkest,
     },
     font: {
       title: '"Squada One", cursive',
@@ -74,7 +75,7 @@ export function AppGlobalStyles({ children }) {
             font-size: 1.6rem;
             font-family: ${theme.font.body};
             line-height: 1.6;
-            color: ${theme.colors.secondary};
+            color: ${theme.colors.textColorDark};
             height: 100%;
           }
 

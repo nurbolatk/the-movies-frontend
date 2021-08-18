@@ -7,20 +7,32 @@ import 'context/styles'
 import { AppGlobalStyles, theme } from 'context/styles'
 import { FullPageErrorFallback } from 'components/molecules/FullPageErrorFallback'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      useErrorBoundary: true,
+      refetchOnWindowFocus: false,
+      retry(failureCount, error) {
+        if (error.status === 404) return false
+        else if (failureCount < 2) return true
+        else return false
+      },
+    },
+  },
+})
 
 export function AppProviders({ children }) {
   return (
-    <ThemeProvider theme={theme.light}>
-      <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
-        <QueryClientProvider client={queryClient}>
-          <Router>
+    <Router>
+      <ThemeProvider theme={theme.light}>
+        <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
+          <QueryClientProvider client={queryClient}>
             <AppGlobalStyles>
               <AuthProvider>{children}</AuthProvider>
             </AppGlobalStyles>
-          </Router>
-        </QueryClientProvider>
-      </ErrorBoundary>
-    </ThemeProvider>
+          </QueryClientProvider>
+        </ErrorBoundary>
+      </ThemeProvider>
+    </Router>
   )
 }

@@ -6,6 +6,7 @@ import { Button, ButtonText, ErrorMessage, FormGroup, Input, Spinner } from 'com
 import { Modal, ModalContents, ModalOpenButton } from 'components/organisms/Modal'
 import { useAsync } from 'hooks/useAsync'
 import { mq } from 'context/styles'
+import { Link } from 'react-router-dom'
 
 export function AuthModal({ onClick: onNavItemClick }) {
   const { user, login, register, logout } = useAuth()
@@ -107,9 +108,13 @@ export function AuthModal({ onClick: onNavItemClick }) {
     </Modal>
   ) : (
     <>
+      <Link to="/list/to-watch">To Watch</Link>
+      <Link to="/list/watched">Watched</Link>
       <p
         css={{
-          marginTop: 'auto',
+          [mq.extraSmall]: {
+            marginTop: 'auto',
+          },
         }}
       >
         Hi, {user.username}
