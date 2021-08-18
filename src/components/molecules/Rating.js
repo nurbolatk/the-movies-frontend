@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { useTheme } from '@emotion/react'
+import { ErrorMessage } from 'components/atoms'
 import { useListItem, useUpdateListItem } from 'hooks/lists'
 import React from 'react'
 import { BsFillStarFill, BsStar, BsStarFill } from 'react-icons/bs'
@@ -18,9 +19,9 @@ const visuallyHiddenCSS = {
 
 export function Rating({ movieId }) {
   const { listItem } = useListItem(movieId)
-  const { mutateAsync } = useUpdateListItem()
+  const { mutateAsync, isError, error } = useUpdateListItem()
   const { colors } = useTheme()
-  console.log(listItem)
+
   const rootClassName = `list-item-${listItem?.id}`
   const stars = Array.from({ length: 5 }).map((_, index) => {
     const ratingId = `rating-${listItem?.id}-${index}`
@@ -79,6 +80,9 @@ export function Rating({ movieId }) {
       }}
     >
       <span css={{ display: 'flex' }}>{stars}</span>
+      {isError && (
+        <ErrorMessage error={error} variant="inline" css={{ marginLeft: 6, fontSize: '0.7em' }} />
+      )}
     </div>
   ) : null
 }
