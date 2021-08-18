@@ -1,16 +1,19 @@
-// import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Container } from 'components/atoms'
 import { AsyncMovieRow } from 'components/molecules/AsyncMovieRow'
 import { useList } from 'hooks/lists'
 
 export function List() {
-  // const { listName } = useParams()
-  const listItems = useList()
-  console.log({ listItems })
+  const { listName } = useParams()
+  const { list } = useList()
+
+  const filteredList = list.filter((item) =>
+    listName === 'watched' ? item.watched : !item.watched,
+  )
 
   return (
     <Container>
-      {listItems.map((item) => (
+      {filteredList.map((item) => (
         <AsyncMovieRow key={item.movieId} movieId={item.movieId} />
       ))}
     </Container>

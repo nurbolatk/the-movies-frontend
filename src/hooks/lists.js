@@ -4,16 +4,16 @@ import { api } from 'utils/api'
 
 function useList() {
   const { user } = useAuth()
-  const { data: list } = useQuery({
+  const result = useQuery({
     queryKey: 'list-items',
     queryFn: () => api('list-items', { token: user?.token }),
   })
 
-  return list ?? []
+  return { ...result, list: result.data ?? [] }
 }
 
 function useListItem(movieId) {
-  return useList().find((item) => item.movieId === movieId)
+  return useList().list.find((item) => item.movieId === movieId)
 }
 
 function useCreateListItem() {
