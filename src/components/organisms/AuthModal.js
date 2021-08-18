@@ -108,16 +108,17 @@ export function AuthModal({ onClick: onNavItemClick }) {
     </Modal>
   ) : (
     <>
-      <Link
-        css={{
-          marginTop: 'auto',
-        }}
-        to="/list/to-watch"
-      >
-        To Watch
-      </Link>
+      <Link to="/list/to-watch">To Watch</Link>
       <Link to="/list/watched">Watched</Link>
-      <p>Hi, {user.username}</p>
+      <p
+        css={{
+          [mq.extraSmall]: {
+            marginTop: 'auto',
+          },
+        }}
+      >
+        Hi, {user.username}
+      </p>
       <Button onClick={handleLogout}>Logout</Button>
     </>
   )
