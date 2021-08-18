@@ -4,6 +4,7 @@ import { Poster } from 'components/atoms'
 import { mq } from 'context/styles'
 import { useAuth } from 'context/AuthProvider'
 import { StatusButtons } from './StatusButtons'
+import { Rating } from './Rating'
 
 export function MovieRow({ movie }) {
   const { user } = useAuth()
@@ -55,6 +56,7 @@ export function MovieRow({ movie }) {
           {user && <StatusButtons movie={movie} />}
         </div>
         <p>{movie.release_date}</p>
+        {user && <Rating movieId={movie.id} />}
       </div>
     </div>
   )

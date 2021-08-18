@@ -13,7 +13,9 @@ function useList() {
 }
 
 function useListItem(movieId) {
-  return useList().list.find((item) => item.movieId === movieId)
+  const list = useList()
+  const listItem = list.list.find((item) => item.movieId === movieId)
+  return { ...list, listItem }
 }
 
 function useCreateListItem() {

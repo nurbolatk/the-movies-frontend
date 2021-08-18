@@ -8,6 +8,7 @@ import { useAuth } from 'context/AuthProvider'
 import { GenresList } from 'components/molecules/GenresList'
 import { useMovie } from 'hooks/movies'
 import { mq } from 'context/styles'
+import { Rating } from 'components/molecules/Rating'
 
 export function MovieDetails() {
   const { id } = useParams()
@@ -73,6 +74,7 @@ export function MovieDetails() {
                   {user && <StatusButtons movie={movie} />}
                 </div>
                 <p>{movie.release_date}</p>
+                {user && <Rating movieId={movie.id} />}
                 <p>{movie.overview}</p>
                 <div
                   css={{

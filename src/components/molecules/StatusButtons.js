@@ -40,7 +40,7 @@ function TooltipButton({ label, icon, highlight, onClick, ...rest }) {
 function StatusButtons({ movie }) {
   const theme = useTheme()
 
-  const listItem = useListItem(movie.id)
+  const { listItem } = useListItem(movie.id)
   const { mutateAsync: addListItem } = useCreateListItem()
   const { mutateAsync: removeListItem } = useRemoveListItem()
   const { mutateAsync: updateListItem } = useUpdateListItem()
