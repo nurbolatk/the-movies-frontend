@@ -30,7 +30,6 @@ async function api(
 
   const url = useTmdb ? tmdbUrl(endpoint, params) : `${backendUrl}/${endpoint}?${params}`
 
-  console.log({ url, config })
   const response = await window.fetch(url, config)
 
   if (response.status === 401) {
