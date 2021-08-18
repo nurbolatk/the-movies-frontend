@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export function FullPageErrorFallback({ error }) {
   const theme = useTheme()
-  console.log(theme)
+
   return (
     <div
       role="alert"

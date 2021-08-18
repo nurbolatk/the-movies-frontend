@@ -4,7 +4,7 @@ import { useTheme } from '@emotion/react'
 import { ErrorMessage } from 'components/atoms'
 import { useListItem, useUpdateListItem } from 'hooks/lists'
 import React from 'react'
-import { BsFillStarFill, BsStar, BsStarFill } from 'react-icons/bs'
+import { BsStarFill } from 'react-icons/bs'
 
 const visuallyHiddenCSS = {
   border: '0',
