@@ -45,15 +45,21 @@ const FormGroup = styled.div`
   }
 `
 
-const inputStyles = (props) => css`
+const inputStyles = ({ theme }) => css`
   display: block;
   width: 100%;
-  border: 1px solid ${props.theme.colors.border};
+  border: 1px solid ${theme.colors.border};
   background-color: white;
-  color: ${props.theme.colors.secondary};
+  color: ${theme.colors.secondary};
   line-height: 1.5;
   border-radius: 0.25rem;
   padding: 0.8rem 1.2rem;
+  outline: none;
+  transition: border 0.2s;
+
+  &:focus {
+    border: 1px solid ${theme.colors.primary};
+  }
 `
 
 const Input = styled.input`

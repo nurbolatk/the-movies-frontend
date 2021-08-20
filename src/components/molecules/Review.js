@@ -1,27 +1,35 @@
 /** @jsxImportSource @emotion/react */
-import { ErrorMessage, Spinner, TextArea } from 'components/atoms'
 import React from 'react'
+import debounceFn from 'debounce-fn'
+import { ErrorMessage, Spinner, TextArea } from 'components/atoms'
 
-import { useListItem } from 'hooks/lists'
+import { useListItem, useUpdateListItem } from 'hooks/lists'
 
 export function Review({ movieId }) {
-  const { listItem, isLoading, isError, error } = useListItem(movieId)
-  const [review, setReview] = React.useState(listItem?.review ?? '')
+  const { listItem } = useListItem(movieId)
+  const { mutateAsync, isLoading, isError, error } = useUpdateListItem()
+  const debouncedMutate = React.useMemo(() => debounceFn(mutateAsync, { wait: 300 }), [mutateAsync])
 
   function handleChange(e) {
-    setReview(e.target.value)
+    debouncedMutate({ id: listItem.id, review: e.target.value })
   }
 
-  return listItem?.watched ? (
+  return listItem && listItem.watched ? (
     <div
       css={{
         marginTop: '3rem',
       }}
     >
       <>
-        <h5>Write your review {isLoading && <Spinner />}</h5>
+        <h5>Your review {isLoading && <Spinner />}</h5>
         {isError && <ErrorMessage error={error} />}
-        <TextArea rows="5" value={review} onChange={handleChange} />
+
+        <TextArea
+          rows="5"
+          defaultValue={listItem.review ?? ''}
+          placeholder="Write your review"
+          onChange={handleChange}
+        />
       </>
     </div>
   ) : null
