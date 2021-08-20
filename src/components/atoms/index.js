@@ -45,17 +45,23 @@ const FormGroup = styled.div`
   }
 `
 
+const inputStyles = (props) => css`
+  display: block;
+  width: 100%;
+  border: 1px solid ${props.theme.colors.border};
+  background-color: white;
+  color: ${props.theme.colors.secondary};
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  padding: 0.8rem 1.2rem;
+`
+
 const Input = styled.input`
-  ${(props) => css`
-    display: block;
-    width: 100%;
-    border: 1px solid ${props.theme.colors.border};
-    background-color: white;
-    color: ${props.theme.colors.secondary};
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    padding: 0.8rem 1.2rem;
-  `}
+  ${inputStyles}
+`
+
+const TextArea = styled.textarea`
+  ${inputStyles}
 `
 
 const Card = styled.div`
@@ -177,6 +183,7 @@ export {
   ButtonIcon,
   FormGroup,
   Input,
+  TextArea,
   Card,
   Spinner,
   Container,

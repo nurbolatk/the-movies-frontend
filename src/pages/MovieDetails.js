@@ -9,6 +9,7 @@ import { GenresList } from 'components/molecules/GenresList'
 import { useMovie } from 'hooks/movies'
 import { mq } from 'context/styles'
 import { Rating } from 'components/molecules/Rating'
+import { Review } from 'components/molecules/Review'
 
 export function MovieDetails() {
   const { id } = useParams()
@@ -87,6 +88,7 @@ export function MovieDetails() {
                 </div>
               </div>
             </div>
+            {user && <Review movieId={movie.id} />}
           </>
         )}
       </div>

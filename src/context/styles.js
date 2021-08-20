@@ -129,12 +129,12 @@ export function AppGlobalStyles({ children }) {
 
           h5 {
             font-size: calc(1.6rem);
-            /* font-weight: 400; */
+            font-weight: 400;
           }
 
           h6 {
             font-size: calc(1.2rem);
-            /* font-weight: 400; */
+            font-weight: 400;
           }
 
           a {
