@@ -21,7 +21,15 @@ export function Review({ movieId }) {
       }}
     >
       <>
-        <h5>Your review {isLoading && <Spinner />}</h5>
+        <h5
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+          }}
+        >
+          Your review {isLoading && <Spinner />}
+        </h5>
         {isError && <ErrorMessage error={error} />}
 
         <TextArea

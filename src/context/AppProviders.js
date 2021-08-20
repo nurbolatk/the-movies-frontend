@@ -7,7 +7,7 @@ import 'context/styles'
 import { AppGlobalStyles, theme } from 'context/styles'
 import { FullPageErrorFallback } from 'components/molecules/FullPageErrorFallback'
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       useErrorBoundary: true,

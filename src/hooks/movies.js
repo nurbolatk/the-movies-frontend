@@ -1,5 +1,22 @@
 import { useQuery, useQueryClient } from 'react-query'
 import { api } from 'utils/api'
+import moviewPlaceholder from 'assets/movie-placeholder.svg'
+
+const loadingMovie = {
+  id: 'id',
+  title: 'Loading...',
+  poster_path: moviewPlaceholder,
+  release_date: 'Loading...',
+  overview: 'Loading...',
+  genres: Array.from({ length: 4 }, (_, i) => ({ id: i, name: 'loading' })),
+}
+
+const loadingMovies = Array.from({ length: 10 }, (_, i) => ({
+  ...loadingMovie,
+  id: `loading-movie-${i}`,
+}))
+
+const loadingSearchMovies = { results: loadingMovies }
 
 const queryConfig = {
   staleTime: 1000 * 60 * 60,
@@ -22,7 +39,7 @@ export function useMovieSearch(query) {
       },
     },
   )
-  return { ...result, movies: result.data }
+  return { ...result, movies: result.data ?? loadingSearchMovies }
 }
 
 export function useMovie(movieId) {
@@ -31,11 +48,11 @@ export function useMovie(movieId) {
     () => api(`movie/${movieId}`, {}, true),
     queryConfig,
   )
-  return { ...result, movie: result.data }
+  return { ...result, movie: result.data ?? loadingMovie }
 }
 
 export function useMoviesByCategory(category) {
-  return useQuery({
+  const result = useQuery({
     queryKey: category,
     queryFn: () =>
       api(
@@ -48,6 +65,8 @@ export function useMoviesByCategory(category) {
         true,
       ),
   })
+
+  return { ...result, data: result.data ?? loadingMovie }
 }
 
 export function useGenre(genreId) {

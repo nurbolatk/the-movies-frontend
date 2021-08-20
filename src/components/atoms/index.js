@@ -4,6 +4,7 @@ import { css, keyframes, useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { mq } from 'context/styles'
 import { GiSpinningBlades } from 'react-icons/gi'
+import { RiLoaderFill } from 'react-icons/ri'
 
 const primaryColor = (props) => css`
   background-color: ${props.theme.colors.primary};
@@ -86,7 +87,7 @@ const spin = keyframes`
     transform: rotate(360deg);
   }
 `
-const Spinner = styled(GiSpinningBlades)`
+const Spinner = styled(RiLoaderFill)`
   animation: ${spin} 1s linear infinite;
 `
 
@@ -105,7 +106,7 @@ function FullPageLoading() {
         justify-content: center;
       `}
     >
-      <Spinner
+      <GiSpinningBlades
         css={css`
           font-size: 16rem;
           color: white;
@@ -139,7 +140,11 @@ const ButtonIcon = styled.button`
 `
 
 function Poster({ movie }) {
-  return <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+  // console.log({ movie })
+  const imgUrl = movie.poster_path?.startsWith('/static/')
+    ? movie.poster_path
+    : `http://image.tmdb.org/t/p/w500/${movie.poster_path}`
+  return <img src={imgUrl} alt={movie.title} />
 }
 
 const errorMessageVariants = {

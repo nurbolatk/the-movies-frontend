@@ -1,3 +1,6 @@
+import { queryClient } from 'context/AppProviders'
+import { logout } from './auth-manager'
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL
 const tmdbApiKey = process.env.REACT_APP_TMDB_API_KEY
 
@@ -33,7 +36,9 @@ async function api(
   const response = await window.fetch(url, config)
 
   if (response.status === 401) {
-    // window.location.assign(window.location)
+    queryClient.clear()
+    logout()
+    window.location.assign(window.location.toString())
     return Promise.reject({ message: 'Please re-authenticate.' })
   }
 

@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { Container, ErrorMessage, Spinner } from 'components/atoms'
+import { Container, ErrorMessage } from 'components/atoms'
 import { useParams } from 'react-router-dom'
 import { useMovieSearch } from 'hooks/movies'
 import { MovieRow } from 'components/molecules/MovieRow'
@@ -12,7 +12,7 @@ import { SearchForm } from 'components/molecules/SearchForm'
 export function Discover() {
   const { query } = useParams()
   const theme = useTheme()
-  const { movies, error, isLoading, isError, isSuccess } = useMovieSearch(query ?? '')
+  const { movies, error, isError, isSuccess } = useMovieSearch(query ?? '')
 
   return (
     <Container
@@ -25,9 +25,8 @@ export function Discover() {
     >
       <SearchForm />
       {isError && <ErrorMessage error={error} />}
-      {isLoading && <Spinner />}
       {isSuccess && movies?.results.length === 0 && <p>No movies found with query "{query}"</p>}
-      {movies?.results?.length && (
+      {movies?.results?.length ? (
         <div
           css={{
             marginTop: '2rem',
@@ -37,7 +36,7 @@ export function Discover() {
             <MovieRow key={movie.id} movie={movie} />
           ))}
         </div>
-      )}
+      ) : null}
     </Container>
   )
 }

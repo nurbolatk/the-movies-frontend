@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { useParams } from 'react-router-dom'
-import { Container, ErrorMessage, Poster, Spinner } from 'components/atoms'
+import { Container, ErrorMessage, Poster } from 'components/atoms'
 import { StatusButtons } from 'components/molecules/StatusButtons'
 import { useAuth } from 'context/AuthProvider'
 import { GenresList } from 'components/molecules/GenresList'
@@ -15,7 +15,7 @@ export function MovieDetails() {
   const { id } = useParams()
   const { user } = useAuth()
 
-  const { movie, isLoading, isError, error } = useMovie(id)
+  const { movie, isError, error } = useMovie(id)
 
   return (
     <Container>
@@ -26,7 +26,6 @@ export function MovieDetails() {
           padding: '2rem',
         }}
       >
-        {isLoading && <Spinner size={56} />}
         {isError && <ErrorMessage error={error} />}
         {movie && (
           <>
