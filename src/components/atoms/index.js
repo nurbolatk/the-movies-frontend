@@ -140,7 +140,6 @@ const ButtonIcon = styled.button`
 `
 
 function Poster({ movie }) {
-  // console.log({ movie })
   const imgUrl = movie.poster_path?.startsWith('/static/')
     ? movie.poster_path
     : `http://image.tmdb.org/t/p/w500/${movie.poster_path}`

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useTheme } from '@emotion/react'
-import { Container, Spinner } from 'components/atoms'
+import { Container } from 'components/atoms'
 import { MovieRow } from 'components/molecules/MovieRow'
 import { BrowseByGenre } from 'components/organisms/BrowseByGenre'
 import { useGenre } from 'hooks/movies'
@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 export function FilterByGenres() {
   const { genreId } = useParams()
   const theme = useTheme()
-  const { movies, isLoading } = useGenre(genreId)
+  const { movies } = useGenre(genreId)
 
   return (
     <Container
@@ -20,7 +20,6 @@ export function FilterByGenres() {
       }}
     >
       <BrowseByGenre />
-      {isLoading && <Spinner />}
       {movies?.results?.length && (
         <div
           css={{

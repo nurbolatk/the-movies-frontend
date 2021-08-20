@@ -11,12 +11,12 @@ const loadingMovie = {
   genres: Array.from({ length: 4 }, (_, i) => ({ id: i, name: 'loading' })),
 }
 
-const loadingMovies = Array.from({ length: 10 }, (_, i) => ({
-  ...loadingMovie,
-  id: `loading-movie-${i}`,
-}))
-
-const loadingSearchMovies = { results: loadingMovies }
+const loadingMovies = {
+  results: Array.from({ length: 10 }, (_, i) => ({
+    ...loadingMovie,
+    id: `loading-movie-${i}`,
+  })),
+}
 
 const queryConfig = {
   staleTime: 1000 * 60 * 60,
@@ -39,7 +39,7 @@ export function useMovieSearch(query) {
       },
     },
   )
-  return { ...result, movies: result.data ?? loadingSearchMovies }
+  return { ...result, movies: result.data ?? loadingMovies }
 }
 
 export function useMovie(movieId) {
@@ -66,14 +66,14 @@ export function useMoviesByCategory(category) {
       ),
   })
 
-  return { ...result, data: result.data ?? loadingMovie }
+  return { ...result, data: result.data ?? loadingMovies }
 }
 
 export function useGenre(genreId) {
   const result = useQuery(['genreMovies', { genreId }], () =>
     api('discover/movie', { queryParams: { with_genres: genreId, page: 1 } }, true),
   )
-  return { ...result, movies: result.data }
+  return { ...result, movies: result.data ?? loadingMovies }
 }
 
 export function useGenres() {
