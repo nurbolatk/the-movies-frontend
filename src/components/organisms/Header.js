@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 import { ButtonIcon, Container } from 'components/atoms'
 import { AuthModal } from './AuthModal'
 import { BsX } from 'react-icons/bs'
-import { Nav } from 'components/molecules/Nav'
+import { Navbar } from 'components/molecules/Navbar'
 import { mq } from 'context/styles'
 
-export function Navbar() {
+export function Header() {
   const theme = useTheme()
 
   return (
@@ -38,7 +38,7 @@ export function Navbar() {
         >
           the movies
         </Link>
-        <Nav>
+        <Navbar>
           <ButtonIcon
             css={{
               position: 'absolute',
@@ -54,7 +54,7 @@ export function Navbar() {
             <BsX />
           </ButtonIcon>
           <AuthModal />
-        </Nav>
+        </Navbar>
       </Container>
     </div>
   )

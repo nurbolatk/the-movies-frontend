@@ -8,7 +8,7 @@ import { BiMenu } from 'react-icons/bi'
 import { callAll } from 'utils/callAll'
 import { useTheme } from '@emotion/react'
 
-export function Nav({ children }) {
+export function Navbar({ children }) {
   const [menuOpen, setMenuOpen] = React.useState(false)
   const theme = useTheme()
 

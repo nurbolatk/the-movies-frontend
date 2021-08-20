@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Footer } from 'components/molecules/Footer'
-import { Navbar } from 'components/organisms/Navbar'
+import { Header } from 'components/organisms/Header'
 import { AppRoutes } from 'context/AppRoutes'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         gap: '3rem',
       }}
     >
-      <Navbar />
+      <Header />
       <div
         css={{
           flex: '1',
