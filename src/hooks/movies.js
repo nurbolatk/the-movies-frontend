@@ -34,6 +34,22 @@ export function useMovie(movieId) {
   return { ...result, movie: result.data }
 }
 
+export function useMoviesByCategory(category) {
+  return useQuery({
+    queryKey: category,
+    queryFn: () =>
+      api(
+        `movie/${category}`,
+        {
+          queryParams: {
+            page: 1,
+          },
+        },
+        true,
+      ),
+  })
+}
+
 export function useGenre(genreId) {
   const result = useQuery(['genreMovies', { genreId }], () =>
     api('discover/movie', { queryParams: { with_genres: genreId, page: 1 } }, true),

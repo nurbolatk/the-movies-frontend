@@ -1,16 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react'
-import { useAsync } from 'hooks/useAsync'
 import { ErrorMessage, Spinner } from 'components/atoms'
 import { MovieList } from 'components/molecules/MovieList'
+import { useMoviesByCategory } from 'hooks/movies'
 
-export function HorizontalMovieList({ title, fetchFunction }) {
-  const { data, isLoading, isError, error, run } = useAsync()
-
-  React.useEffect(() => {
-    run(fetchFunction())
-  }, [run, fetchFunction])
+export function HorizontalMovieList({ title, listId }) {
+  const { data, isLoading, isError, error } = useMoviesByCategory(listId)
 
   return (
     <div>
