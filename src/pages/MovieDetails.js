@@ -61,11 +61,12 @@ export function MovieDetails() {
                 <div
                   css={{
                     display: 'flex',
-                    alignItems: 'center',
+                    alignItems: 'flex-start',
                   }}
                 >
                   <h2
                     css={{
+                      marginTop: 0,
                       marginRight: 'auto',
                     }}
                   >
